@@ -26,7 +26,6 @@
         }
         .img-produto:hover { opacity: 0.9; }
 
-        /* Estilização da Barra de Rolagem Horizontal tipo iFood */
         .ifood-scroll {
             display: flex;
             overflow-x: auto;
@@ -36,25 +35,11 @@
             scrollbar-width: thin;
             scrollbar-color: #d4af37 #1a1a1a;
         }
-        .ifood-scroll::-webkit-scrollbar {
-            height: 6px;
-        }
-        .ifood-scroll::-webkit-scrollbar-track {
-            background: #121212;
-            border-radius: 4px;
-        }
-        .ifood-scroll::-webkit-scrollbar-thumb {
-            background: #d4af37;
-            border-radius: 4px;
-        }
-        .combo-card {
-            min-width: 280px;
-            max-width: 300px;
-            flex: 0 0 auto;
-            scroll-snap-align: start;
-        }
+        .ifood-scroll::-webkit-scrollbar { height: 6px; }
+        .ifood-scroll::-webkit-scrollbar-track { background: #121212; border-radius: 4px; }
+        .ifood-scroll::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+        .combo-card { min-width: 280px; max-width: 300px; flex: 0 0 auto; scroll-snap-align: start; }
         
-        /* Modal de Zoom da Imagem */
         #modal-zoom {
             display: none;
             position: fixed;
@@ -81,7 +66,6 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-    <!-- CABEÇALHO GLOBAL RESPONSIVO -->
     <header class="border-b border-neutral-800 py-3 sm:py-4 px-4 sticky top-0 bg-[#080808]/95 backdrop-blur z-50 shadow-2xl">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3 cursor-pointer" onclick="mudarPagina('home')">
@@ -92,26 +76,23 @@
                 </div>
             </div>
             
-            <!-- Menu de Navegação Adaptável -->
             <nav class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 text-xs font-bold">
                 <button onclick="mudarPagina('home')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-house mr-1"></i> Início</button>
                 <button onclick="mudarPagina('acessorios')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-mobile-screen mr-1"></i> Acessórios</button>
                 <button onclick="mudarPagina('variedades')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-box-open mr-1"></i> Variedades</button>
+                <button onclick="mudarPagina('avaliacoes')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-star mr-1"></i> Avaliações</button>
                 <button onclick="mudarPagina('contato')" class="gold-bg px-3 py-1.5 rounded-lg shadow transition hover:opacity-90"><i class="fa-solid fa-headset mr-1"></i> Contato</button>
             </nav>
         </div>
     </header>
 
-    <!-- CONTEÚDO DINÂMICO (PÁGINAS) -->
     <main class="max-w-6xl w-full mx-auto p-3 sm:p-6 flex-grow">
 
-        <!-- ================= PÁGINA: HOME ================= -->
         <div id="page-home" class="page active">
             <div class="gold-bg text-black font-extrabold text-center py-3 px-4 rounded-xl mb-6 text-xs sm:text-sm shadow-md tracking-wide flex items-center justify-center gap-2">
                 <i class="fa-solid fa-bolt"></i> Frete Grátis (O800) para toda Maceió! Confira os destaques abaixo:
             </div>
 
-            <!-- SEÇÃO DE COMBOS IMPERDÍVEIS (ESTILO IFOOD - CARROSSEL HORIZONTAL) -->
             <section class="mb-10">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
@@ -121,13 +102,9 @@
                 </div>
                 <p class="text-xs text-neutral-400 mb-4">Aproveite nossos kits e produtos em evidência com imagens exclusivas.</p>
 
-                <!-- Carrossel Estilo iFood -->
-                <div class="ifood-scroll pt-2" id="carrossel-combos">
-                    <!-- Inserido dinamicamente via JS -->
-                </div>
+                <div class="ifood-scroll pt-2" id="carrossel-combos"></div>
             </section>
 
-            <!-- Banner Promocional -->
             <div class="card-custom p-6 md:p-8 rounded-2xl mb-8 border-l-4 gold-border relative overflow-hidden bg-gradient-to-r from-[#121212] to-[#1a1608]">
                 <div class="absolute -right-10 -bottom-10 text-neutral-900 text-9xl opacity-20 pointer-events-none">
                     <i class="fa-solid fa-crown"></i>
@@ -158,7 +135,6 @@
             <h3 class="text-2xl font-bold text-white mb-6">Categorias Principais</h3>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <!-- Categoria 1 -->
                 <div onclick="mudarPagina('acessorios')" class="card-custom rounded-2xl cursor-pointer overflow-hidden group flex flex-col justify-between">
                     <div>
                         <div class="overflow-hidden h-52 bg-neutral-900">
@@ -176,7 +152,6 @@
                     </div>
                 </div>
 
-                <!-- Categoria 2 -->
                 <div onclick="mudarPagina('variedades')" class="card-custom rounded-2xl cursor-pointer overflow-hidden group flex flex-col justify-between">
                     <div>
                         <div class="overflow-hidden h-52 bg-neutral-900">
@@ -196,7 +171,6 @@
             </div>
         </div>
 
-        <!-- ================= PÁGINA: ACESSÓRIOS ================= -->
         <div id="page-acessorios" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
@@ -208,7 +182,6 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-acessorios"></div>
         </div>
 
-        <!-- ================= PÁGINA: VARIEDADES ================= -->
         <div id="page-variedades" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
@@ -220,7 +193,24 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-variedades"></div>
         </div>
 
-        <!-- ================= PÁGINA: CONTATO & SUPORTE ================= -->
+        <div id="page-avaliacoes" class="page">
+            <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
+                <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
+            </button>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-3xl font-black gold-text mb-2">Avaliações dos Clientes</h2>
+                    <p class="text-xs text-neutral-400">Veja o que os clientes de Maceió estão falando sobre a TH Imports.</p>
+                </div>
+                <button onclick="abrirModalAvaliacao()" class="gold-bg font-bold py-2.5 px-4 rounded-xl text-xs flex items-center gap-2 shadow hover:opacity-90 transition">
+                    <i class="fa-solid fa-pen-to-square"></i> Deixar Avaliação
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grid-avaliacoes"></div>
+        </div>
+
         <div id="page-contato" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
@@ -230,21 +220,19 @@
             <p class="text-xs text-neutral-400 mb-8">Fale diretamente com nossa equipe em Maceió para tirar dúvidas ou fechar pedidos.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Card WhatsApp Oficial -->
                 <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-xl gold-bg flex items-center justify-center text-xl mb-4 shadow">
                             <i class="fa-brands fa-whatsapp"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">WhatsApp Oficial</h3>
-                        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">Atendimento ágil para reservas, confirmação de endereços para entrega grátis em maceio e dúvidas sobre produtos.</p>
+                        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">Atendimento ágil para reservas, confirmação de endereços para entrega gratis em maceio e dúvidas sobre produtos.</p>
                     </div>
                     <a href="https://wa.me/5582999129161?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento." target="_blank" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm text-center flex items-center justify-center gap-2 hover:opacity-90 transition shadow">
                         <i class="fa-brands fa-whatsapp text-lg"></i> Chamar no WhatsApp
                     </a>
                 </div>
 
-                <!-- Card Informações e Região -->
                 <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 gold-text flex items-center justify-center text-xl mb-4 shadow">
@@ -263,7 +251,6 @@
 
     </main>
 
-    <!-- MODAL DE ZOOM DA IMAGEM -->
     <div id="modal-zoom" onclick="fecharZoom()">
         <div class="relative max-w-4xl mx-auto text-center" onclick="event.stopPropagation()">
             <button onclick="fecharZoom()" class="absolute -top-10 right-0 text-white bg-neutral-800 hover:bg-neutral-700 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition">
@@ -274,15 +261,53 @@
         </div>
     </div>
 
-    <!-- RODAPÉ -->
+    <div id="modal-avaliacao" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4">
+        <div class="card-custom max-w-md w-full p-6 rounded-2xl relative border gold-border">
+            <button onclick="fecharModalAvaliacao()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h3 class="text-xl font-black gold-text mb-2">Deixe sua Avaliação</h3>
+            <p class="text-xs text-neutral-400 mb-6">Sua opinião é fundamental para a TH Imports! Como foi sua experiência?</p>
+            
+            <form id="form-avaliacao" onsubmit="enviarAvaliacao(event)">
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-neutral-300 mb-1">Seu Nome:</label>
+                    <input type="text" id="aval-nome" required placeholder="Ex: Lucas Silva" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-xs font-bold text-neutral-300 mb-1">Nota (Estrelas):</label>
+                    <select id="aval-nota" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none">
+                        <option value="5">⭐⭐⭐⭐⭐ (5/5 - Excelente)</option>
+                        <option value="4">⭐⭐⭐⭐ (4/5 - Muito Bom)</option>
+                        <option value="3">⭐⭐⭐ (3/5 - Bom)</option>
+                    </select>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-xs font-bold text-neutral-300 mb-1">Seu Comentário:</label>
+                    <textarea id="aval-comentario" required rows="3" placeholder="Ex: Atendimento rápido e entrega O800 perfeita em Maceió!" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none resize-none"></textarea>
+                </div>
+                <button type="submit" id="btn-enviar-aval" class="w-full gold-bg font-bold py-3 rounded-xl text-sm shadow hover:opacity-90 transition">
+                    Publicar Avaliação
+                </button>
+            </form>
+        </div>
+    </div>
+
     <footer class="border-t border-neutral-800 text-center py-8 px-4 text-xs text-neutral-400 mt-16 bg-[#050505]">
         <p class="font-bold text-neutral-200 text-sm">TH IMPORTS © 2026</p>
         <p class="mt-1">Atendimento Oficial via WhatsApp: <a href="https://wa.me/5582999129161" class="gold-text underline font-bold">(82) 99912-9161</a></p>
         <p class="mt-2 text-neutral-500">Maceió - Alagoas</p>
     </footer>
 
-    <!-- SCRIPT DA LOJA E PRODUTOS -->
     <script>
+        // ==========================================================
+        // CONFIGURAÇÕES DO GITHUB (CONFIGURADAS COM SEUS DADOS)
+        // ==========================================================
+        const GITHUB_USER = "Thimporrts"; 
+        const GITHUB_REPO = "Thimpoorts"; 
+        const GITHUB_TOKEN = "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"; 
+        const GITHUB_FILE_PATH = "index.html"; 
+
         const combosImperdiveis = [
             {
                 id: "combo-perfeito-35",
@@ -346,10 +371,19 @@
             { id: "garrafa-termica", nome: "Garrafa térmica", preco: "R$ 69,90", img: "garrafa-termica.jpg", descricao: "Parede dupla em aço inox: mantém a água gelada ou o café quente por horas." }
         ];
 
+        // Lista de Avaliações salvas diretamente no código (Array principal)
+        let avaliacoes = [
+            { nome: "Matheus Henrique", nota: 5, comentario: "Atendimento sensacional e entrega super rápida em Maceió. Recomendo demais!", data: "Ontem" },
+            { nome: "Rafaela Costa", nota: 5, comentario: "Comprei o combo de capinha e película, encaixou perfeitamente. Nota 10!", data: "Há 3 dias" }
+        ];
+
         function mudarPagina(paginaId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + paginaId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (paginaId === 'avaliacoes') {
+                renderizarAvaliacoes();
+            }
         }
 
         function tratarErroImagem(imgElement) {
@@ -373,8 +407,111 @@
             modal.classList.remove('active');
         }
 
+        function abrirModalAvaliacao() {
+            document.getElementById('modal-avaliacao').classList.remove('hidden');
+            document.getElementById('modal-avaliacao').classList.add('flex');
+        }
+
+        function fecharModalAvaliacao() {
+            document.getElementById('modal-avaliacao').classList.remove('flex');
+            document.getElementById('modal-avaliacao').classList.add('hidden');
+        }
+
+        async function enviarAvaliacao(event) {
+            event.preventDefault();
+            const nome = document.getElementById('aval-nome').value.trim();
+            const nota = parseInt(document.getElementById('aval-nota').value);
+            const comentario = document.getElementById('aval-comentario').value.trim();
+            const btnEnviar = document.getElementById('btn-enviar-aval');
+
+            btnEnviar.textContent = "Salvando no GitHub...";
+            btnEnviar.disabled = true;
+
+            const novaAvaliacao = {
+                nome: nome,
+                nota: nota,
+                comentario: comentario,
+                data: "Hoje"
+            };
+
+            // Adiciona no array local
+            avaliacoes.unshift(novaAvaliacao);
+
+            try {
+                // Comunicação direta com a API do GitHub para atualizar o arquivo do site
+                const urlApi = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
+                
+                // 1. Pega o arquivo atual do GitHub para obter o SHA correto
+                const responseGet = await fetch(urlApi, {
+                    headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+                });
+                
+                if (!responseGet.ok) throw new Error("Erro ao acessar o repositório do GitHub.");
+                const fileData = await responseGet.json();
+                
+                // Decodifica o conteúdo atual do site em Base64
+                const contentDecoded = decodeURIComponent(escape(atob(fileData.content)));
+
+                // Substitui a string do array 'let avaliacoes = [...]' antiga pela nova com a avaliação nova inserida
+                const novoArrayString = `let avaliacoes = ` + JSON.stringify(avaliacoes, null, 4) + `;`;
+                const regexArray = /let avaliacoes\s*=\s*\[[\s\S]*?\];/;
+                
+                if (!regexArray.test(contentDecoded)) {
+                    throw new Error("Não foi possível encontrar a variável de avaliações no código.");
+                }
+
+                const novoHtmlContent = contentDecoded.replace(regexArray, novoArrayString);
+                const contentEncoded = btoa(unescape(encodeURIComponent(novoHtmlContent)));
+
+                // 2. Envia o commit automático para o GitHub
+                const responsePut = await fetch(urlApi, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: `Nova avaliação adicionada por ${nome} via site`,
+                        content: contentEncoded,
+                        sha: fileData.sha
+                    })
+                });
+
+                if (!responsePut.ok) throw new Error("Erro ao salvar o commit no GitHub.");
+
+                alert("Avaliação enviada e salva direto no código do GitHub com sucesso!");
+                fecharModalAvaliacao();
+                renderizarAvaliacoes();
+
+            } catch (error) {
+                console.error(error);
+                alert("Erro ao sincronizar com o GitHub. Verifique os dados de configuração do token.");
+            } finally {
+                btnEnviar.textContent = "Publicar Avaliação";
+                btnEnviar.disabled = false;
+                document.getElementById('form-avaliacao').reset();
+            }
+        }
+
+        function renderizarAvaliacoes() {
+            const container = document.getElementById('grid-avaliacoes');
+            container.innerHTML = avaliacoes.map(a => {
+                let estrelasHtml = '⭐'.repeat(a.nota);
+                return `
+                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-white text-sm">${a.nome}</h4>
+                            <span class="text-[10px] text-neutral-500">${a.data}</span>
+                        </div>
+                        <div class="text-xs mb-3 text-amber-400">${estrelasHtml}</div>
+                        <p class="text-xs text-neutral-300 leading-relaxed">"${a.comentario}"</p>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
         function renderizarTudo() {
-            // Combos e Destaques (Carrossel Horizontal)
             document.getElementById('carrossel-combos').innerHTML = combosImperdiveis.map(c => {
                 let inputExtraHtml = '';
                 if (c.requerModeloIphone) {
@@ -402,7 +539,6 @@
                 </div>`;
             }).join('');
 
-            // Acessórios
             document.getElementById('grid-acessorios').innerHTML = produtosAcessorios.map(p => {
                 let inputExtraHtml = '';
                 if (p.requerModeloIphone) {
@@ -430,7 +566,6 @@
                 </div>`;
             }).join('');
 
-            // Variedades
             document.getElementById('grid-variedades').innerHTML = produtosVariedades.map(p => {
                 let imagemHtml = '';
                 if (p.imgs) {
@@ -468,6 +603,8 @@
                     </div>
                 </div>`;
             }).join('');
+
+            renderizarAvaliacoes();
         }
 
         function comprarCombo(id, nome, preco) {
@@ -488,7 +625,7 @@
             window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
         }
 
-        function comprarProduto(id, nome, preco) {
+        function comprarProduto(id, nome, preco, requerModelo) {
             const telefone = "5582999129161";
             let detalheModelo = "";
             const inputEl = document.getElementById('input-' + id);
