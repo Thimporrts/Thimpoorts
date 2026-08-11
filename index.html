@@ -72,7 +72,7 @@
                 <img src="logo.jpg" alt="TH Imports Logo" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 gold-border object-cover shadow-lg" onerror="this.onerror=null; this.src='reserva12.jpg'">
                 <div>
                     <h1 class="text-lg sm:text-xl font-black tracking-wider gold-text uppercase">TH IMPORTS</h1>
-                    <p class="text-[10px] text-neutral-400">⚡ Maceió O800</p>
+                    <p class="text-[10px] text-neutral-400">⚡ Maceió Grátis</p>
                 </div>
             </div>
             
@@ -90,7 +90,7 @@
 
         <div id="page-home" class="page active">
             <div class="gold-bg text-black font-extrabold text-center py-3 px-4 rounded-xl mb-6 text-xs sm:text-sm shadow-md tracking-wide flex items-center justify-center gap-2">
-                <i class="fa-solid fa-bolt"></i> Frete Grátis (O800) para toda Maceió! Confira os destaques abaixo:
+                <i class="fa-solid fa-bolt"></i> Frete Grátis para toda Maceió! Confira os destaques abaixo:
             </div>
 
             <section class="mb-10">
@@ -122,7 +122,7 @@
                         <span class="text-xs text-neutral-400">Atendimento Direto no WhatsApp</span>
                     </div>
                     <div class="bg-neutral-900/60 p-4 rounded-xl border border-neutral-800">
-                        <span class="block text-xl font-black gold-text">🛵 O800</span>
+                        <span class="block text-xl font-black gold-text">🛵 Grátis</span>
                         <span class="text-xs text-neutral-400">Entrega Grátis em Maceió</span>
                     </div>
                     <div class="bg-neutral-900/60 p-4 rounded-xl border border-neutral-800">
@@ -193,6 +193,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-variedades"></div>
         </div>
 
+        <!-- ABA DE AVALIAÇÕES INTEGRADA COM O FIREBASE -->
         <div id="page-avaliacoes" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
@@ -208,7 +209,10 @@
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grid-avaliacoes"></div>
+            <!-- Grid onde as avaliações do Firebase vão aparecer automaticamente -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grid-avaliacoes">
+                <p class="text-xs text-neutral-400">Carregando avaliações...</p>
+            </div>
         </div>
 
         <div id="page-contato" class="page">
@@ -226,7 +230,7 @@
                             <i class="fa-brands fa-whatsapp"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">WhatsApp Oficial</h3>
-                        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">Atendimento ágil para reservas, confirmação de endereços para entrega gratis em maceio e dúvidas sobre produtos.</p>
+                        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">Atendimento ágil para reservas, confirmação de endereços para entrega grátis em maceio e dúvidas sobre produtos.</p>
                     </div>
                     <a href="https://wa.me/5582999129161?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento." target="_blank" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm text-center flex items-center justify-center gap-2 hover:opacity-90 transition shadow">
                         <i class="fa-brands fa-whatsapp text-lg"></i> Chamar no WhatsApp
@@ -239,7 +243,7 @@
                             <i class="fa-solid fa-location-dot"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">Região de Atendimento</h3>
-                        <p class="text-xs text-neutral-400 mb-2 leading-relaxed">📍 Entregas rápidas e gratuitas (entrega gratis em maceio) em toda Maceió - AL.</p>
+                        <p class="text-xs text-neutral-400 mb-2 leading-relaxed">📍 Entregas rápidas e gratuitas (entrega grátis em maceio) em toda Maceió - AL.</p>
                         <p class="text-xs text-neutral-400 mb-6 leading-relaxed">⏰ Horário de atendimento comercial online todos os dias.</p>
                     </div>
                     <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 text-center">
@@ -261,6 +265,7 @@
         </div>
     </div>
 
+    <!-- MODAL DE AVALIAÇÃO CONECTADO AO FIREBASE -->
     <div id="modal-avaliacao" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4">
         <div class="card-custom max-w-md w-full p-6 rounded-2xl relative border gold-border">
             <button onclick="fecharModalAvaliacao()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
@@ -280,11 +285,13 @@
                         <option value="5">⭐⭐⭐⭐⭐ (5/5 - Excelente)</option>
                         <option value="4">⭐⭐⭐⭐ (4/5 - Muito Bom)</option>
                         <option value="3">⭐⭐⭐ (3/5 - Bom)</option>
+                        <option value="2">⭐⭐ (2/5 - Regular)</option>
+                        <option value="1">⭐ (1/5 - Ruim)</option>
                     </select>
                 </div>
                 <div class="mb-6">
                     <label class="block text-xs font-bold text-neutral-300 mb-1">Seu Comentário:</label>
-                    <textarea id="aval-comentario" required rows="3" placeholder="Ex: Atendimento rápido e entrega O800 perfeita em Maceió!" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none resize-none"></textarea>
+                    <textarea id="aval-comentario" required rows="3" placeholder="Ex: Atendimento rápido e entrega grátis perfeita em Maceió!" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none resize-none"></textarea>
                 </div>
                 <button type="submit" id="btn-enviar-aval" class="w-full gold-bg font-bold py-3 rounded-xl text-sm shadow hover:opacity-90 transition">
                     Publicar Avaliação
@@ -299,14 +306,23 @@
         <p class="mt-2 text-neutral-500">Maceió - Alagoas</p>
     </footer>
 
-    <script>
-        // ==========================================================
-        // CONFIGURAÇÕES DO GITHUB (ATUALIZADAS COM O NOVO TOKEN)
-        // ==========================================================
-        const GITHUB_USER = "Thimporrts"; 
-        const GITHUB_REPO = "Thimpoorts"; 
-        const GITHUB_TOKEN = "Ghp_MVjlGou8wBUrtHdi3y6qsKdKIC0oaS1rruaF"; 
-        const GITHUB_FILE_PATH = "index.html"; 
+    <!-- SCRIPT DO SITE + INTEGRAÇÃO FIREBASE PARA AS AVALIAÇÕES -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Configuração do seu Banco de Dados do Google (Firebase)
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-cPboJobrxWwueCjxFu8sFRepvBYs8cU",
+            authDomain: "psicostoreavaliacoes.firebaseapp.com",
+            projectId: "psicostoreavaliacoes",
+            storageBucket: "psicostoreavaliacoes.firebasestorage.app",
+            messagingSenderId: "611819399512",
+            appId: "1:611819399512:web:a3937264b514a8f9bd1d2d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
         const combosImperdiveis = [
             {
@@ -371,28 +387,22 @@
             { id: "garrafa-termica", nome: "Garrafa térmica", preco: "R$ 69,90", img: "garrafa-termica.jpg", descricao: "Parede dupla em aço inox: mantém a água gelada ou o café quente por horas." }
         ];
 
-        // Lista de Avaliações salvas diretamente no código (Array principal)
-        let avaliacoes = [
-            { nome: "Matheus Henrique", nota: 5, comentario: "Atendimento sensacional e entrega super rápida em Maceió. Recomendo demais!", data: "Ontem" },
-            { nome: "Rafaela Costa", nota: 5, comentario: "Comprei o combo de capinha e película, encaixou perfeitamente. Nota 10!", data: "Há 3 dias" }
-        ];
-
-        function mudarPagina(paginaId) {
+        window.mudarPagina = function(paginaId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + paginaId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if (paginaId === 'avaliacoes') {
-                renderizarAvaliacoes();
+                carregarAvaliacoes();
             }
         }
 
-        function tratarErroImagem(imgElement) {
+        window.tratarErroImagem = function(imgElement) {
             if (imgElement.src.includes('reserva12.jpg')) return;
             imgElement.onerror = null; 
             imgElement.src = 'reserva12.jpg';
         }
 
-        function abrirZoom(imgSrc, legenda) {
+        window.abrirZoom = function(imgSrc, legenda) {
             const modal = document.getElementById('modal-zoom');
             const modalImg = document.getElementById('modal-img');
             const modalCaption = document.getElementById('modal-caption');
@@ -402,113 +412,126 @@
             modal.classList.add('active');
         }
 
-        function fecharZoom() {
+        window.fecharZoom = function() {
             const modal = document.getElementById('modal-zoom');
             modal.classList.remove('active');
         }
 
-        function abrirModalAvaliacao() {
+        window.abrirModalAvaliacao = function() {
             document.getElementById('modal-avaliacao').classList.remove('hidden');
             document.getElementById('modal-avaliacao').classList.add('flex');
         }
 
-        function fecharModalAvaliacao() {
+        window.fecharModalAvaliacao = function() {
             document.getElementById('modal-avaliacao').classList.remove('flex');
             document.getElementById('modal-avaliacao').classList.add('hidden');
         }
 
-        async function enviarAvaliacao(event) {
+        // Função para carregar as avaliações direto do Firebase
+        window.carregarAvaliacoes = async function() {
+            const container = document.getElementById('grid-avaliacoes');
+            if (!container) return;
+            
+            container.innerHTML = "<p class='text-xs text-neutral-400'>Carregando avaliações...</p>";
+
+            try {
+                const q = query(collection(db, "avaliacoes"));
+                const querySnapshot = await getDocs(q);
+                
+                container.innerHTML = "";
+                
+                if (querySnapshot.empty) {
+                    container.innerHTML = "<p class='text-xs text-neutral-400'>Ainda não há avaliações. Seja o primeiro a avaliar!</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const a = doc.data();
+                    let estrelasHtml = '⭐'.repeat(a.nota || 5);
+                    const div = document.createElement('div');
+                    div.className = "card-custom p-5 rounded-2xl flex flex-col justify-between";
+                    div.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-bold text-white text-sm">${a.nome}</h4>
+                            </div>
+                            <div class="text-xs mb-3 text-amber-400">${estrelasHtml}</div>
+                            <p class="text-xs text-neutral-300 leading-relaxed">"${a.comentario}"</p>
+                        </div>`;
+                    container.appendChild(div);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar avaliações:", error);
+                container.innerHTML = "<p class='text-xs text-red-400'>Erro ao carregar avaliações do banco de dados.</p>";
+            }
+        }
+
+        // Função para enviar avaliação direto para o Firebase sem mexer em token do GitHub
+        window.enviarAvaliacao = async function(event) {
             event.preventDefault();
             const nome = document.getElementById('aval-nome').value.trim();
             const nota = parseInt(document.getElementById('aval-nota').value);
             const comentario = document.getElementById('aval-comentario').value.trim();
             const btnEnviar = document.getElementById('btn-enviar-aval');
 
-            btnEnviar.textContent = "Salvando no GitHub...";
+            btnEnviar.textContent = "Publicando...";
             btnEnviar.disabled = true;
 
-            const novaAvaliacao = {
-                nome: nome,
-                nota: nota,
-                comentario: comentario,
-                data: "Hoje"
-            };
-
-            // Adiciona no array local
-            avaliacoes.unshift(novaAvaliacao);
-
             try {
-                // Comunicação direta com a API do GitHub para atualizar o arquivo do site
-                const urlApi = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
-                
-                // 1. Pega o arquivo atual do GitHub para obter o SHA correto
-                const responseGet = await fetch(urlApi, {
-                    headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-                });
-                
-                if (!responseGet.ok) throw new Error("Erro ao acessar o repositório do GitHub.");
-                const fileData = await responseGet.json();
-                
-                // Decodifica o conteúdo atual do site em Base64
-                const contentDecoded = decodeURIComponent(escape(atob(fileData.content)));
-
-                // Substitui a string do array 'let avaliacoes = [...]' antiga pela nova com a avaliação nova inserida
-                const novoArrayString = `let avaliacoes = ` + JSON.stringify(avaliacoes, null, 4) + `;`;
-                const regexArray = /let avaliacoes\s*=\s*\[[\s\S]*?\];/;
-                
-                if (!regexArray.test(contentDecoded)) {
-                    throw new Error("Não foi possível encontrar a variável de avaliações no código.");
-                }
-
-                const novoHtmlContent = contentDecoded.replace(regexArray, novoArrayString);
-                const contentEncoded = btoa(unescape(encodeURIComponent(novoHtmlContent)));
-
-                // 2. Envia o commit automático para o GitHub
-                const responsePut = await fetch(urlApi, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${GITHUB_TOKEN}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: `Nova avaliação adicionada por ${nome} via site`,
-                        content: contentEncoded,
-                        sha: fileData.sha
-                    })
+                await addDoc(collection(db, "avaliacoes"), {
+                    nome: nome,
+                    nota: nota,
+                    comentario: comentario,
+                    data: new Date()
                 });
 
-                if (!responsePut.ok) throw new Error("Erro ao salvar o commit no GitHub.");
-
-                alert("Avaliação enviada e salva direto no código do GitHub com sucesso!");
+                alert("Avaliação publicada com sucesso!");
                 fecharModalAvaliacao();
-                renderizarAvaliacoes();
-
+                document.getElementById('form-avaliacao').reset();
+                carregarAvaliacoes();
             } catch (error) {
-                console.error(error);
-                alert("Erro ao sincronizar com o GitHub. Verifique os dados de configuração do token.");
+                console.error("Erro ao salvar:", error);
+                alert("Erro ao enviar avaliação. Tente novamente.");
             } finally {
                 btnEnviar.textContent = "Publicar Avaliação";
                 btnEnviar.disabled = false;
-                document.getElementById('form-avaliacao').reset();
             }
         }
 
-        function renderizarAvaliacoes() {
-            const container = document.getElementById('grid-avaliacoes');
-            container.innerHTML = avaliacoes.map(a => {
-                let estrelasHtml = '⭐'.repeat(a.nota);
-                return `
-                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="font-bold text-white text-sm">${a.nome}</h4>
-                            <span class="text-[10px] text-neutral-500">${a.data}</span>
-                        </div>
-                        <div class="text-xs mb-3 text-amber-400">${estrelasHtml}</div>
-                        <p class="text-xs text-neutral-300 leading-relaxed">"${a.comentario}"</p>
-                    </div>
-                </div>`;
-            }).join('');
+        window.comprarCombo = function(id, nome, preco) {
+            const telefone = "5582999129161";
+            let detalheModelo = "";
+            const inputEl = document.getElementById('input-' + id);
+            if (inputEl) {
+                const valorInput = inputEl.value.trim();
+                if (valorInput !== "") {
+                    detalheModelo = ` (Modelo: ${valorInput})`;
+                } else {
+                    alert("Por favor, digite o modelo do seu celular antes de prosseguir!");
+                    inputEl.focus();
+                    return;
+                }
+            }
+            let mensagem = `Salve, TH Imports! Tenho interesse no combo:\n\n*${nome}*${detalheModelo}\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega grátis em maceio!`;
+            window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        window.comprarProduto = function(id, nome, preco) {
+            const telefone = "5582999129161";
+            let detalheModelo = "";
+            const inputEl = document.getElementById('input-' + id);
+            if (inputEl) {
+                const valorInput = inputEl.value.trim();
+                if (valorInput !== "") {
+                    detalheModelo = ` (Modelo: ${valorInput})`;
+                } else {
+                    alert("Por favor, digite o modelo do seu celular antes de prosseguir!");
+                    inputEl.focus();
+                    return;
+                }
+            }
+            let mensagem = `Salve, TH Imports! Tenho interesse no produto:\n\n*${nome}*${detalheModelo}\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega grátis em maceio!`;
+            window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
         }
 
         function renderizarTudo() {
@@ -603,47 +626,12 @@
                     </div>
                 </div>`;
             }).join('');
-
-            renderizarAvaliacoes();
         }
 
-        function comprarCombo(id, nome, preco) {
-            const telefone = "5582999129161";
-            let detalheModelo = "";
-            const inputEl = document.getElementById('input-' + id);
-            if (inputEl) {
-                const valorInput = inputEl.value.trim();
-                if (valorInput !== "") {
-                    detalheModelo = ` (Modelo: ${valorInput})`;
-                } else {
-                    alert("Por favor, digite o modelo do seu celular antes de prosseguir!");
-                    inputEl.focus();
-                    return;
-                }
-            }
-            let mensagem = `Salve, TH Imports! Tenho interesse no combo:\n\n*${nome}*${detalheModelo}\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega gratis em maceio!`;
-            window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
-        }
-
-        function comprarProduto(id, nome, preco, requerModelo) {
-            const telefone = "5582999129161";
-            let detalheModelo = "";
-            const inputEl = document.getElementById('input-' + id);
-            if (inputEl) {
-                const valorInput = inputEl.value.trim();
-                if (valorInput !== "") {
-                    detalheModelo = ` (Modelo: ${valorInput})`;
-                } else {
-                    alert("Por favor, digite o modelo do seu celular antes de prosseguir!");
-                    inputEl.focus();
-                    return;
-                }
-            }
-            let mensagem = `Salve, TH Imports! Tenho interesse no produto:\n\n*${nome}*${detalheModelo}\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega gratis em maceio!`;
-            window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
-        }
-
-        window.onload = renderizarTudo;
+        window.onload = function() {
+            renderizarTudo();
+            carregarAvaliacoes();
+        };
     </script>
 </body>
 </html>
