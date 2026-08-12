@@ -82,7 +82,8 @@
                 <button onclick="mudarPagina('variedades')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-box-open mr-1"></i> Variedades</button>
                 <button onclick="mudarPagina('avaliacoes')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-star mr-1"></i> Avaliações</button>
                 <button onclick="mudarPagina('contato')" class="gold-bg px-3 py-1.5 rounded-lg shadow transition hover:opacity-90"><i class="fa-solid fa-headset mr-1"></i> Contato</button>
-                <button id="btn-menu-admin" onclick="mudarPagina('admin')" class="hidden bg-red-600 text-white px-3 py-1.5 rounded-lg shadow transition hover:bg-red-700"><i class="fa-solid fa-lock-open mr-1"></i> Painel Admin</button>
+                <!-- BOTÃO SECRETO DISCRETO NO CANTINHO DO MENU -->
+                <button onclick="mudarPagina('admin')" class="bg-neutral-900 text-neutral-500 hover:text-[#d4af37] px-2 py-1.5 rounded-lg border border-neutral-800 transition" title="Admin"><i class="fa-solid fa-lock"></i></button>
             </nav>
         </div>
     </header>
@@ -94,6 +95,7 @@
                 <i class="fa-solid fa-bolt"></i> Frete Grátis para toda Maceió! Confira os destaques abaixo:
             </div>
 
+            <!-- CARROSSEL DE COMBOS -->
             <section class="mb-10">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
@@ -102,7 +104,40 @@
                     <span class="text-xs text-neutral-400 hidden sm:inline"><i class="fa-solid fa-arrow-right-arrow-left"></i> Arraste para o lado</span>
                 </div>
                 <div class="ifood-scroll pt-2" id="carrossel-combos">
-                    <p class="text-xs text-neutral-400">Carregando combos...</p>
+                    <!-- COMBO 1 -->
+                    <div class="combo-card card-custom p-4 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <div class="overflow-hidden rounded-xl mb-3 bg-neutral-900 relative group h-40">
+                                <img src="combo1.jpg" alt="Combo Película + Capa" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition duration-300" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, 'Combo Película + Capa')">
+                                <span class="absolute top-2 left-2 gold-bg text-[10px] font-black px-2 py-0.5 rounded-md">COMBO</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-white line-clamp-1">Combo Película de Privacidade + Capa</h4>
+                            <p class="text-[11px] text-neutral-400 mt-1 mb-3 line-clamp-3 leading-relaxed">Proteção total para a tela e traseira do seu aparelho com encaixe perfeito.</p>
+                        </div>
+                        <div>
+                            <span class="text-lg font-black gold-text block mb-3">R$ 50,00</span>
+                            <button onclick="comprarItem('Combo Película de Privacidade + Capa', 'R$ 50,00')" class="w-full gold-bg font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                                <i class="fa-brands fa-whatsapp text-base"></i> Garantir Pedido
+                            </button>
+                        </div>
+                    </div>
+                    <!-- COMBO 2 -->
+                    <div class="combo-card card-custom p-4 rounded-2xl flex flex-col justify-between">
+                        <div>
+                            <div class="overflow-hidden rounded-xl mb-3 bg-neutral-900 relative group h-40">
+                                <img src="combo2.jpg" alt="Kit Carregador Turbo + Fone" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition duration-300" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, 'Kit Carregador Turbo + Fone')">
+                                <span class="absolute top-2 left-2 gold-bg text-[10px] font-black px-2 py-0.5 rounded-md">COMBO</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-white line-clamp-1">Kit Carregador Turbo 20W + Fone</h4>
+                            <p class="text-[11px] text-neutral-400 mt-1 mb-3 line-clamp-3 leading-relaxed">Carregamento ultrarrápido acompanhado de fone de ouvido de alta fidelidade sonora.</p>
+                        </div>
+                        <div>
+                            <span class="text-lg font-black gold-text block mb-3">R$ 75,00</span>
+                            <button onclick="comprarItem('Kit Carregador Turbo 20W + Fone', 'R$ 75,00')" class="w-full gold-bg font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                                <i class="fa-brands fa-whatsapp text-base"></i> Garantir Pedido
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -172,28 +207,104 @@
             </div>
         </div>
 
+        <!-- ACESSÓRIOS -->
         <div id="page-acessorios" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
             </button>
             <h2 class="text-3xl font-black gold-text mb-2">Acessórios para Celular</h2>
             <p class="text-xs text-neutral-400 mb-8">Maximize a proteção e o desempenho do seu smartphone. Clique na foto para ampliar.</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-acessorios">
-                <p class="text-xs text-neutral-400">Carregando acessórios...</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
+                            <img src="pelicula.jpg" alt="Película de Privacidade" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, 'Película de Privacidade')">
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Película de Privacidade</h3>
+                        <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">Evita que curiosos vejam o que está na sua tela em locais públicos. Alta resistência.</p>
+                    </div>
+                    <div>
+                        <span class="text-xl font-black gold-text block mb-4">R$ 30,00</span>
+                        <button onclick="comprarItem('Película de Privacidade', 'R$ 30,00')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
+                        </button>
+                    </div>
+                </div>
+                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
+                            <img src="capinha.jpg" alt="Capa Silicone Aveludado" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, 'Capa Silicone Aveludado')">
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Capa Silicone Aveludado</h3>
+                        <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">Interior aveludado para proteger contra arranhões, toque macio e várias cores.</p>
+                    </div>
+                    <div>
+                        <span class="text-xl font-black gold-text block mb-4">R$ 25,00</span>
+                        <button onclick="comprarItem('Capa Silicone Aveludado', 'R$ 25,00')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
+                        </button>
+                    </div>
+                </div>
+                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
+                            <img src="carregador.jpg" alt="Carregador Turbo 20W" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, 'Carregador Turbo 20W')">
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Carregador Turbo 20W</h3>
+                        <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">Fonte de carregamento rápido segura e com proteção contra superaquecimento.</p>
+                    </div>
+                    <div>
+                        <span class="text-xl font-black gold-text block mb-4">R$ 45,00</span>
+                        <button onclick="comprarItem('Carregador Turbo 20W', 'R$ 45,00')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- VARIEDADES -->
         <div id="page-variedades" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
             </button>
             <h2 class="text-3xl font-black gold-text mb-2">Variedades & Eletrônicos</h2>
             <p class="text-xs text-neutral-400 mb-8">Gadgets tecnológicos e utilidades exclusivas. Clique nas fotos para ampliar.</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-variedades">
-                <p class="text-xs text-neutral-400">Carregando variedades...</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
+                            <img src="kit-churrasco.jpg" alt="Kit Churrasco Inox Premium" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, 'Kit Churrasco Inox Premium')">
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Kit Churrasco Inox Premium</h3>
+                        <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">Conjunto completo com maleta para você mandar bem no churrasco de fim de semana.</p>
+                    </div>
+                    <div class="mt-auto">
+                        <span class="text-xl font-black gold-text block mb-4">R$ 90,00</span>
+                        <button onclick="comprarItem('Kit Churrasco Inox Premium', 'R$ 90,00')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
+                        </button>
+                    </div>
+                </div>
+                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
+                            <img src="smartwatch.jpg" alt="Smartwatch Série 9" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, 'Smartwatch Série 9')">
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Smartwatch Série 9</h3>
+                        <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">Receba notificações, monitore batimentos e personalize o visor com facilidade.</p>
+                    </div>
+                    <div class="mt-auto">
+                        <span class="text-xl font-black gold-text block mb-4">R$ 130,00</span>
+                        <button onclick="comprarItem('Smartwatch Série 9', 'R$ 130,00')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- AVALIAÇÕES -->
         <div id="page-avaliacoes" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
@@ -208,10 +319,20 @@
                 </button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grid-avaliacoes">
-                <p class="text-xs text-neutral-400">Carregando avaliações...</p>
+                <!-- AVALIAÇÃO FIXA DE EXEMPLO -->
+                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-bold text-white text-sm">Matheus Silva</h4>
+                        </div>
+                        <div class="text-xs mb-3 text-amber-400">⭐⭐⭐⭐⭐</div>
+                        <p class="text-xs text-neutral-300 leading-relaxed">"Atendimento rápido e entrega grátis pontual aqui na Ponta Verde. Recomendo demais!"</p>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <!-- CONTATO -->
         <div id="page-contato" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
@@ -254,12 +375,12 @@
 
             <div id="admin-login-box" class="max-w-md mx-auto card-custom p-8 rounded-2xl border gold-border">
                 <h2 class="text-2xl font-black gold-text mb-2 text-center">Painel Restrito</h2>
-                <p class="text-xs text-neutral-400 mb-6 text-center">Faça login com sua conta autorizada para gerenciar o site.</p>
+                <p class="text-xs text-neutral-400 mb-6 text-center">Digite seus dados de administrador para acessar o gerenciamento.</p>
                 
                 <form onsubmit="fazerLoginAdmin(event)">
                     <div class="mb-4">
-                        <label class="block text-xs font-bold text-neutral-300 mb-1">E-mail de Admin:</label>
-                        <input type="email" id="admin-email" required placeholder="seu-email@admin.com" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-sm text-white focus:border-[#d4af37] outline-none">
+                        <label class="block text-xs font-bold text-neutral-300 mb-1">E-mail ou Nick:</label>
+                        <input type="text" id="admin-email" required placeholder="th@admin.com" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-sm text-white focus:border-[#d4af37] outline-none">
                     </div>
                     <div class="mb-6">
                         <label class="block text-xs font-bold text-neutral-300 mb-1">Senha:</label>
@@ -275,7 +396,7 @@
                 <div class="flex items-center justify-between mb-8 bg-neutral-900 p-4 rounded-xl border border-neutral-800">
                     <div>
                         <h2 class="text-xl font-black gold-text">Painel de Gerenciamento</h2>
-                        <p class="text-xs text-neutral-400">Logado com sucesso. Adicione ou remova produtos em tempo real.</p>
+                        <p class="text-xs text-neutral-400">Logado com sucesso. Você pode alterar preços e imagens por aqui.</p>
                     </div>
                     <button onclick="fazerLogoutAdmin()" class="bg-red-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-700 transition">Sair</button>
                 </div>
@@ -397,21 +518,15 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Checar estado do admin ao carregar a página
         onAuthStateChanged(auth, (user) => {
-            const btnAdminMenu = document.getElementById('btn-menu-admin');
             const loginBox = document.getElementById('admin-login-box');
             const painelBox = document.getElementById('admin-painel-box');
 
             if (user) {
-                // Está logado como admin
-                if(btnAdminMenu) btnAdminMenu.classList.remove('hidden');
                 if(loginBox) loginBox.classList.add('hidden');
                 if(painelBox) painelBox.classList.remove('hidden');
                 carregarProdutosAdmin();
             } else {
-                // Não está logado
-                if(btnAdminMenu) btnAdminMenu.classList.add('hidden');
                 if(loginBox) loginBox.classList.remove('hidden');
                 if(painelBox) painelBox.classList.add('hidden');
             }
@@ -451,7 +566,6 @@
             if (paginaId === 'avaliacoes') {
                 carregarAvaliacoes();
             } else if (paginaId === 'admin') {
-                // Se for para o admin, atualiza a listagem se logado
                 carregarProdutosAdmin();
             }
         }
@@ -485,107 +599,13 @@
             document.getElementById('modal-avaliacao').classList.add('hidden');
         }
 
-        // Funções do Banco de Dados para os Produtos
-        window.carregarProdutosSite = async function() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "produtos"));
-                let combos = [];
-                let acessorios = [];
-                let variedades = [];
-
-                querySnapshot.forEach((docSnap) => {
-                    let p = docSnap.data();
-                    p.idDoc = docSnap.id;
-                    if (p.categoria === 'combos') combos.push(p);
-                    if (p.categoria === 'acessorios') acessorios.push(p);
-                    if (p.categoria === 'variedades') variedades.push(p);
-                });
-
-                // Renderiza Combos
-                const boxCombos = document.getElementById('carrossel-combos');
-                if (boxCombos) {
-                    if (combos.length === 0) boxCombos.innerHTML = "<p class='text-xs text-neutral-400'>Nenhum combo cadastrado.</p>";
-                    else {
-                        boxCombos.innerHTML = combos.map(c => `
-                            <div class="combo-card card-custom p-4 rounded-2xl flex flex-col justify-between">
-                                <div>
-                                    <div class="overflow-hidden rounded-xl mb-3 bg-neutral-900 relative group h-40">
-                                        <img src="${c.img}" alt="${c.nome}" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition duration-300" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${c.nome}')">
-                                        <span class="absolute top-2 left-2 gold-bg text-[10px] font-black px-2 py-0.5 rounded-md">COMBO</span>
-                                    </div>
-                                    <h4 class="font-bold text-sm text-white line-clamp-1">${c.nome}</h4>
-                                    <p class="text-[11px] text-neutral-400 mt-1 mb-3 line-clamp-3 leading-relaxed">${c.descricao}</p>
-                                </div>
-                                <div>
-                                    <span class="text-lg font-black gold-text block mb-3">${c.preco}</span>
-                                    <button onclick="comprarItem('${c.nome}', '${c.preco}')" class="w-full gold-bg font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
-                                        <i class="fa-brands fa-whatsapp text-base"></i> Garantir Pedido
-                                    </button>
-                                </div>
-                            </div>`).join('');
-                    }
-                }
-
-                // Renderiza Acessórios
-                const boxAcessorios = document.getElementById('grid-acessorios');
-                if (boxAcessorios) {
-                    if (acessorios.length === 0) boxAcessorios.innerHTML = "<p class='text-xs text-neutral-400'>Nenhum acessório cadastrado.</p>";
-                    else {
-                        boxAcessorios.innerHTML = acessorios.map(p => `
-                            <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
-                                <div>
-                                    <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
-                                        <img src="${p.img}" alt="${p.nome}" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome}')">
-                                    </div>
-                                    <h3 class="font-bold text-lg text-white">${p.nome}</h3>
-                                    <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">${p.descricao}</p>
-                                </div>
-                                <div>
-                                    <span class="text-xl font-black gold-text block mb-4">${p.preco}</span>
-                                    <button onclick="comprarItem('${p.nome}', '${p.preco}')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
-                                        <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
-                                    </button>
-                                </div>
-                            </div>`).join('');
-                    }
-                }
-
-                // Renderiza Variedades
-                const boxVariedades = document.getElementById('grid-variedades');
-                if (boxVariedades) {
-                    if (variedades.length === 0) boxVariedades.innerHTML = "<p class='text-xs text-neutral-400'>Nenhuma variedade cadastrada.</p>";
-                    else {
-                        boxVariedades.innerHTML = variedades.map(p => `
-                            <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
-                                <div>
-                                    <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
-                                        <img src="${p.img}" alt="${p.nome}" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome}')">
-                                    </div>
-                                    <h3 class="font-bold text-lg text-white">${p.nome}</h3>
-                                    <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">${p.descricao}</p>
-                                </div>
-                                <div class="mt-auto">
-                                    <span class="text-xl font-black gold-text block mb-4">${p.preco}</span>
-                                    <button onclick="comprarItem('${p.nome}', '${p.preco}')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
-                                        <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
-                                    </button>
-                                </div>
-                            </div>`).join('');
-                    }
-                }
-
-            } catch (error) {
-                console.error("Erro ao carregar produtos:", error);
-            }
-        }
-
         window.comprarItem = function(nome, preco) {
             const telefone = "5582999129161";
             let mensagem = `Salve, TH Imports! Tenho interesse no produto:\n\n*${nome}*\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega grátis em maceio!`;
             window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
         }
 
-        // Funções Exclusivas do Painel Admin (Protegidas pelo Firebase Auth)
+        // Funções Exclusivas do Painel Admin
         window.adicionarProdutoBanco = async function(event) {
             event.preventDefault();
             const nome = document.getElementById('novo-nome').value.trim();
@@ -599,7 +619,6 @@
                 alert("Produto cadastrado com sucesso!");
                 event.target.reset();
                 carregarProdutosAdmin();
-                carregarProdutosSite();
             } catch (error) {
                 alert("Erro ao salvar! Verifique se você está logado corretamente.");
                 console.error(error);
@@ -615,7 +634,7 @@
                 listaDiv.innerHTML = "";
 
                 if (querySnapshot.empty) {
-                    listaDiv.innerHTML = "<p class='text-xs text-neutral-400'>Nenhum produto cadastrado no banco.</p>";
+                    listaDiv.innerHTML = "<p class='text-xs text-neutral-400'>Nenhum produto extra no banco (os produtos fixos já aparecem no site).</p>";
                     return;
                 }
 
@@ -651,7 +670,6 @@
                 await updateDoc(doc(db, "produtos", id), { preco: novoPreco });
                 alert("Preço atualizado com sucesso!");
                 carregarProdutosAdmin();
-                carregarProdutosSite();
             } catch (error) {
                 alert("Erro ao atualizar preço. Sem permissão.");
                 console.error(error);
@@ -665,30 +683,21 @@
                 await deleteDoc(doc(db, "produtos", id));
                 alert("Produto removido com sucesso!");
                 carregarProdutosAdmin();
-                carregarProdutosSite();
             } catch (error) {
                 alert("Erro ao excluir produto. Sem permissão.");
                 console.error(error);
             }
         }
 
-        // Sistema de Avaliações
         window.carregarAvaliacoes = async function() {
             const container = document.getElementById('grid-avaliacoes');
             if (!container) return;
-            
-            container.innerHTML = "<p class='text-xs text-neutral-400'>Carregando avaliações...</p>";
 
             try {
                 const q = query(collection(db, "avaliacoes"));
                 const querySnapshot = await getDocs(q);
                 
-                container.innerHTML = "";
-                
-                if (querySnapshot.empty) {
-                    container.innerHTML = "<p class='text-xs text-neutral-400'>Ainda não há avaliações. Seja o primeiro a avaliar!</p>";
-                    return;
-                }
+                if (querySnapshot.empty) return;
 
                 querySnapshot.forEach((doc) => {
                     const a = doc.data();
@@ -738,7 +747,6 @@
         }
 
         window.onload = function() {
-            carregarProdutosSite();
             carregarAvaliacoes();
         };
     </script>
