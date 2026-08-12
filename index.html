@@ -264,6 +264,29 @@
         </div>
     </div>
 
+    <!-- MODAL DE SENHA DO ADMIN -->
+    <div id="modal-senha-admin" class="fixed inset-0 z-50 bg-black/85 hidden items-center justify-center p-4">
+        <div class="card-custom max-w-sm w-full p-6 rounded-2xl relative border gold-border text-center">
+            <button onclick="fecharModalSenha()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-12 h-12 rounded-full gold-bg flex items-center justify-center text-xl mx-auto mb-4 shadow">
+                <i class="fa-solid fa-lock text-black"></i>
+            </div>
+            <h3 class="text-xl font-black gold-text mb-1">Painel Restrito</h3>
+            <p class="text-xs text-neutral-400 mb-6">Digite a senha de administrador para acessar o gerenciamento de preços e imagens.</p>
+            
+            <form onsubmit="verificarSenhaAdmin(event)">
+                <div class="mb-4">
+                    <input type="password" id="admin-senha-input" required placeholder="Digite a senha..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-sm text-center text-white focus:border-[#d4af37] outline-none tracking-widest">
+                </div>
+                <button type="submit" class="w-full gold-bg font-bold py-3 rounded-xl text-sm shadow hover:opacity-90 transition">
+                    Entrar no Painel
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- MODAL DE AVALIAÇÃO -->
     <div id="modal-avaliacao" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4">
         <div class="card-custom max-w-md w-full p-6 rounded-2xl relative border gold-border">
@@ -344,6 +367,9 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // SENHA DO ADMINISTRADOR (Altere aqui se desejar)
+        const SENHA_ADMIN = "thimports2026";
 
         // Bases de Produtos originais
         const combosImperdiveisBase = [
@@ -446,8 +472,39 @@
             document.getElementById('modal-avaliacao').classList.add('hidden');
         }
 
-        // Funções do Painel Admin
+        // Funções do Painel Admin com Senha
         window.abrirPainelAdmin = function() {
+            // Verifica se já está logado na sessão atual
+            if (sessionStorage.getItem('th_admin_autenticado') === 'true') {
+                abrirPainelDireto();
+            } else {
+                document.getElementById('modal-senha-admin').classList.remove('hidden');
+                document.getElementById('modal-senha-admin').classList.add('flex');
+                document.getElementById('admin-senha-input').value = '';
+                document.getElementById('admin-senha-input').focus();
+            }
+        }
+
+        window.fecharModalSenha = function() {
+            document.getElementById('modal-senha-admin').classList.remove('flex');
+            document.getElementById('modal-senha-admin').classList.add('hidden');
+        }
+
+        window.verificarSenhaAdmin = function(event) {
+            event.preventDefault();
+            const senhaDigitada = document.getElementById('admin-senha-input').value;
+            if (senhaDigitada === SENHA_ADMIN) {
+                sessionStorage.setItem('th_admin_autenticado', 'true');
+                fecharModalSenha();
+                abrirPainelDireto();
+            } else {
+                alert("Senha incorreta!");
+                document.getElementById('admin-senha-input').value = '';
+                document.getElementById('admin-senha-input').focus();
+            }
+        }
+
+        function abrirPainelDireto() {
             document.getElementById('modal-admin').classList.remove('hidden');
             document.getElementById('modal-admin').classList.add('flex');
             renderizarListaAdmin();
