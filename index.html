@@ -82,6 +82,7 @@
                 <button onclick="mudarPagina('variedades')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-box-open mr-1"></i> Variedades</button>
                 <button onclick="mudarPagina('avaliacoes')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-star mr-1"></i> Avaliações</button>
                 <button onclick="mudarPagina('contato')" class="gold-bg px-3 py-1.5 rounded-lg shadow transition hover:opacity-90"><i class="fa-solid fa-headset mr-1"></i> Contato</button>
+                <button id="btn-menu-admin" onclick="mudarPagina('admin')" class="hidden bg-red-600 text-white px-3 py-1.5 rounded-lg shadow transition hover:bg-red-700"><i class="fa-solid fa-lock-open mr-1"></i> Painel Admin</button>
             </nav>
         </div>
     </header>
@@ -100,9 +101,9 @@
                     </h3>
                     <span class="text-xs text-neutral-400 hidden sm:inline"><i class="fa-solid fa-arrow-right-arrow-left"></i> Arraste para o lado</span>
                 </div>
-                <p class="text-xs text-neutral-400 mb-4">Aproveite nossos kits e produtos em evidência com imagens exclusivas.</p>
-
-                <div class="ifood-scroll pt-2" id="carrossel-combos"></div>
+                <div class="ifood-scroll pt-2" id="carrossel-combos">
+                    <p class="text-xs text-neutral-400">Carregando combos...</p>
+                </div>
             </section>
 
             <div class="card-custom p-6 md:p-8 rounded-2xl mb-8 border-l-4 gold-border relative overflow-hidden bg-gradient-to-r from-[#121212] to-[#1a1608]">
@@ -175,30 +176,28 @@
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
             </button>
-
             <h2 class="text-3xl font-black gold-text mb-2">Acessórios para Celular</h2>
             <p class="text-xs text-neutral-400 mb-8">Maximize a proteção e o desempenho do seu smartphone. Clique na foto para ampliar.</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-acessorios"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-acessorios">
+                <p class="text-xs text-neutral-400">Carregando acessórios...</p>
+            </div>
         </div>
 
         <div id="page-variedades" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
             </button>
-
             <h2 class="text-3xl font-black gold-text mb-2">Variedades & Eletrônicos</h2>
             <p class="text-xs text-neutral-400 mb-8">Gadgets tecnológicos e utilidades exclusivas. Clique nas fotos para ampliar.</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-variedades"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-variedades">
+                <p class="text-xs text-neutral-400">Carregando variedades...</p>
+            </div>
         </div>
 
-        <!-- ABA DE AVALIAÇÕES INTEGRADA COM O FIREBASE -->
         <div id="page-avaliacoes" class="page">
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
             </button>
-
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h2 class="text-3xl font-black gold-text mb-2">Avaliações dos Clientes</h2>
@@ -208,8 +207,6 @@
                     <i class="fa-solid fa-pen-to-square"></i> Deixar Avaliação
                 </button>
             </div>
-
-            <!-- Grid onde as avaliações do Firebase vão aparecer automaticamente -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grid-avaliacoes">
                 <p class="text-xs text-neutral-400">Carregando avaliações...</p>
             </div>
@@ -219,10 +216,8 @@
             <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
                 <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
             </button>
-
             <h2 class="text-3xl font-black gold-text mb-2">Central de Atendimento</h2>
             <p class="text-xs text-neutral-400 mb-8">Fale diretamente com nossa equipe em Maceió para tirar dúvidas ou fechar pedidos.</p>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
                     <div>
@@ -236,7 +231,6 @@
                         <i class="fa-brands fa-whatsapp text-lg"></i> Chamar no WhatsApp
                     </a>
                 </div>
-
                 <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 gold-text flex items-center justify-center text-xl mb-4 shadow">
@@ -244,11 +238,89 @@
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">Região de Atendimento</h3>
                         <p class="text-xs text-neutral-400 mb-2 leading-relaxed">📍 Entregas rápidas e gratuitas (entrega grátis em maceio) em toda Maceió - AL.</p>
-                        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">⏰ Horário de atendimento comercial online todos os dias.</p>
                     </div>
                     <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 text-center">
                         <span class="text-xs font-bold text-neutral-300">Instagram: <span class="gold-text">@thimports_</span></span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAINEL ADMIN SEGURO PROTEGIDO POR FIREBASE AUTH -->
+        <div id="page-admin" class="page">
+            <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
+                <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
+            </button>
+
+            <div id="admin-login-box" class="max-w-md mx-auto card-custom p-8 rounded-2xl border gold-border">
+                <h2 class="text-2xl font-black gold-text mb-2 text-center">Painel Restrito</h2>
+                <p class="text-xs text-neutral-400 mb-6 text-center">Faça login com sua conta autorizada para gerenciar o site.</p>
+                
+                <form onsubmit="fazerLoginAdmin(event)">
+                    <div class="mb-4">
+                        <label class="block text-xs font-bold text-neutral-300 mb-1">E-mail de Admin:</label>
+                        <input type="email" id="admin-email" required placeholder="seu-email@admin.com" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-sm text-white focus:border-[#d4af37] outline-none">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-neutral-300 mb-1">Senha:</label>
+                        <input type="password" id="admin-senha" required placeholder="••••••••" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-sm text-white focus:border-[#d4af37] outline-none">
+                    </div>
+                    <button type="submit" id="btn-login" class="w-full gold-bg font-bold py-3 rounded-xl text-sm shadow hover:opacity-90 transition">
+                        Entrar no Painel
+                    </button>
+                </form>
+            </div>
+
+            <div id="admin-painel-box" class="hidden">
+                <div class="flex items-center justify-between mb-8 bg-neutral-900 p-4 rounded-xl border border-neutral-800">
+                    <div>
+                        <h2 class="text-xl font-black gold-text">Painel de Gerenciamento</h2>
+                        <p class="text-xs text-neutral-400">Logado com sucesso. Adicione ou remova produtos em tempo real.</p>
+                    </div>
+                    <button onclick="fazerLogoutAdmin()" class="bg-red-600 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-red-700 transition">Sair</button>
+                </div>
+
+                <!-- Formulário para Adicionar Produto -->
+                <div class="card-custom p-6 rounded-2xl mb-8 border gold-border">
+                    <h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-plus-circle gold-text mr-2"></i> Adicionar Novo Produto</h3>
+                    <form onsubmit="adicionarProdutoBanco(event)">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold text-neutral-300 mb-1">Nome do Produto:</label>
+                                <input type="text" id="novo-nome" required placeholder="Ex: Capa Turbo Pro" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white outline-none focus:border-[#d4af37]">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-neutral-300 mb-1">Preço:</label>
+                                <input type="text" id="novo-preco" required placeholder="Ex: R$ 35,00" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white outline-none focus:border-[#d4af37]">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-xs font-bold text-neutral-300 mb-1">Categoria:</label>
+                                <select id="novo-categoria" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white outline-none focus:border-[#d4af37]">
+                                    <option value="combos">Combos e Destaques</option>
+                                    <option value="acessorios">Acessórios</option>
+                                    <option value="variedades">Variedades</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-neutral-300 mb-1">Nome do arquivo da imagem:</label>
+                                <input type="text" id="novo-img" required placeholder="Ex: capinha.jpg" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white outline-none focus:border-[#d4af37]">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold text-neutral-300 mb-1">Descrição:</label>
+                            <textarea id="novo-desc" rows="2" required placeholder="Detalhes do produto..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white outline-none focus:border-[#d4af37] resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full gold-bg font-bold py-3 rounded-xl text-sm shadow hover:opacity-90 transition">
+                            Cadastrar no Banco de Dados
+                        </button>
+                    </form>
+                </div>
+
+                <h3 class="text-xl font-bold text-white mb-4">Gerenciar Produtos Atuais</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="admin-lista-produtos">
+                    <p class="text-xs text-neutral-400">Carregando lista...</p>
                 </div>
             </div>
         </div>
@@ -306,12 +378,12 @@
         <p class="mt-2 text-neutral-500">Maceió - Alagoas</p>
     </footer>
 
-    <!-- SCRIPT DO SITE + INTEGRAÇÃO FIREBASE PARA AS AVALIAÇÕES -->
+    <!-- SCRIPT DO SITE + FIREBASE AUTH E FIRESTORE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Configuração do seu Banco de Dados do Google (Firebase)
         const firebaseConfig = {
             apiKey: "AIzaSyC-cPboJobrxWwueCjxFu8sFRepvBYs8cU",
             authDomain: "psicostoreavaliacoes.firebaseapp.com",
@@ -323,69 +395,54 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth(app);
 
-        const combosImperdiveis = [
-            {
-                id: "combo-perfeito-35",
-                nome: "Combo Perfeito (R$ 35)",
-                preco: "R$ 35,00",
-                img: "combo-perfeito-35.jpg",
-                descricao: "Combo especial selecionado com excelente custo-benefício e qualidade garantida TH Imports.",
-                requerModeloCelular: true
-            },
-            {
-                id: "capinhas-iphone-24",
-                nome: "Capinhas para iPhone",
-                preco: "R$ 24,90",
-                img: "capinhas-iphone-24.jpg",
-                descricao: "Diversos Modelos (Transparente, Magsafe, Carbono, Silicone, Colorida e Fosca). Encaixe perfeito, leve e confortável.",
-                requerModeloIphone: true
-            },
-            {
-                id: "combo-perfeito-45",
-                nome: "Combo Perfeito (R$ 45)",
-                preco: "R$ 45,00",
-                img: "combo-perfeito-45.jpg",
-                descricao: "Capinha de alta qualidade + Película de vidro altamente resistente a riscos.",
-                requerModeloIphone: true
-            },
-            {
-                id: "pelicula-avulsa-15",
-                nome: "Película Avulsa",
-                preco: "R$ 15,00",
-                img: "pelicula-avulsa-15.jpg",
-                descricao: "Escolha entre Normal (alta transparência) ou Privacidade (bloqueio lateral).",
-                requerModeloCelular: true
+        // Checar estado do admin ao carregar a página
+        onAuthStateChanged(auth, (user) => {
+            const btnAdminMenu = document.getElementById('btn-menu-admin');
+            const loginBox = document.getElementById('admin-login-box');
+            const painelBox = document.getElementById('admin-painel-box');
+
+            if (user) {
+                // Está logado como admin
+                if(btnAdminMenu) btnAdminMenu.classList.remove('hidden');
+                if(loginBox) loginBox.classList.add('hidden');
+                if(painelBox) painelBox.classList.remove('hidden');
+                carregarProdutosAdmin();
+            } else {
+                // Não está logado
+                if(btnAdminMenu) btnAdminMenu.classList.add('hidden');
+                if(loginBox) loginBox.classList.remove('hidden');
+                if(painelBox) painelBox.classList.add('hidden');
             }
-        ];
+        });
 
-        const produtosAcessorios = [
-            { id: "capinha-silicone", nome: "Capinhas de iPhone Silicone", preco: "R$ 20,00", img: "capinhas-iphone-24.jpg", descricao: "Encaixe milimetricamente perfeito, parte interna aveludada em microfibra.", requerModeloIphone: true },
-            { id: "fone-iphone", nome: "Fone com fio para iPhone", preco: "R$ 25,00", img: "fone-iphone.jpg", descricao: "Desenho anatômico avançado com graves encorpados e agudos cristalinos." },
-            { id: "pelicula-privacidade", nome: "Película de privacidade", preco: "R$ 13,00", img: "pelicula-privacy.jpg", descricao: "Tecnologia anti-espionagem: bloqueia a visão lateral de curiosos.", requerModeloIphone: true },
-            { id: "capinha-android", nome: "Capinhas para android", preco: "R$ 15,00", img: "capa-android.jpg", descricao: "Proteção reforçada nas quinas contra quedas acidentais, design moderno.", requerModeloAndroid: true },
-            { id: "carregador-15w", nome: "Carregador para iPhone 15w", preco: "R$ 25,00", img: "carregador-15w.jpg", descricao: "Fonte compacta inteligente com chip de proteção contra superaquecimento." },
-            { id: "carregador-30w", nome: "Carregador para iPhone 30w", preco: "R$ 35,00", img: "carregador-30w.jpg", descricao: "Carga turbo ultrarrápida com tecnologia Power Delivery (PD)." },
-            { id: "carregador-50w", nome: "Carregador para iPhone 50w", preco: "R$ 45,00", img: "carregador-50w.jpg", descricao: "Desempenho máximo profissional com dupla saída inteligente." },
-            { id: "carregador-android", nome: "Carregador para Android", preco: "R$ 25,00", img: "carregador-android.jpg", descricao: "Compatibilidade universal turbo com suporte a protocolos avançados." },
-            { id: "fone-android", nome: "Fone com fio para Android", preco: "R$ 20,00", img: "fone-android.jpg", descricao: "Microfone integrado de alta sensibilidade com botão multifunção." },
-            { id: "fone-bluetooth", nome: "Fone Bluetooth", preco: "R$ 95,00", img: "fone-bluetooth.jpg", descricao: "Total liberdade sem fios, cancelamento de ruído passivo de alta performance." }
-        ];
+        window.fazerLoginAdmin = async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('admin-email').value;
+            const senha = document.getElementById('admin-senha').value;
+            const btn = document.getElementById('btn-login');
 
-        const produtosVariedades = [
-            { id: "kit-churrasco", nome: "Kit churrasco", preco: "R$ 69,90", imgs: ["kit-churrasco-1.jpg", "kit-churrasco-2.jpg"], descricao: "Fabricado em aço inox cirúrgico com cabos anatômicos em madeira nobre e maleta." },
-            { id: "conjunto-soquetes", nome: "Conjunto de soquetes", preco: "R$ 54,90", img: "maleta-soquetes.jpg", descricao: "Kit profissional com 46 peças em aço cromo-vanádio e catraca reversível." },
-            { id: "suporte-peito", nome: "Suporte de peito", preco: "R$ 59,90", img: "suporte-peito.jpg", descricao: "Ergonomia ajustável e firmeza absoluta para gravações em trilhas e esportes." },
-            { id: "carregador-portatil", nome: "Carregador portátil", preco: "R$ 110,00", img: "bateria-portatil.jpg", descricao: "Powerbank de alta capacidade real para múltiplas recargas completas." },
-            { id: "barra-led", nome: "Barra de led", preco: "R$ 75,90", img: "barra-led.jpg", descricao: "Iluminação RGB dinâmica com múltiplos efeitos para o seu quarto ou setup." },
-            { id: "caixa-som-led", nome: "Caixa de som LED RGB", preco: "R$ 149,90", img: "caixa-som.jpg", descricao: "Som estereofônico potente com graves profundos e batidas sincronizadas." },
-            { id: "kit-smartwatch", nome: "Kit smart watch", preco: "R$ 120,00", img: "smartwatch.jpg", descricao: "Monitoramento completo de saúde, notificações e pulseiras extras inclusas." },
-            { id: "pistola-massagem", nome: "Pistola de massagem", preco: "R$ 85,00", img: "pistola-massagem.jpg", descricao: "Alívio imediato para dores com 4 ponteiras e níveis ajustáveis." },
-            { id: "carregador-veicular", nome: "Carregador veicular", preco: "R$ 25,00", img: "carregador-veicular.jpg", descricao: "Compacto e potente, garante carregamento seguro na tomada 12V do carro." },
-            { id: "pulseiras-smartwatch", nome: "Pulseiras para smartwatch", preco: "R$ 20,00", img: "pulseira-smartwatch.jpg", descricao: "Material flexível de alta durabilidade, antialérgico e com fecho seguro." },
-            { id: "espelho-led", nome: "Espelho de maquiagem Led", preco: "R$ 40,00", img: "espelho-led.jpg", descricao: "Iluminação frontal em LED com ajuste de intensidade para maquiagem." },
-            { id: "garrafa-termica", nome: "Garrafa térmica", preco: "R$ 69,90", img: "garrafa-termica.jpg", descricao: "Parede dupla em aço inox: mantém a água gelada ou o café quente por horas." }
-        ];
+            btn.textContent = "Verificando...";
+            btn.disabled = true;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, senha);
+                alert("Login efetuado com sucesso!");
+            } catch (error) {
+                alert("Erro ao entrar: E-mail ou senha incorretos.");
+                console.error(error);
+            } finally {
+                btn.textContent = "Entrar no Painel";
+                btn.disabled = false;
+            }
+        }
+
+        window.fazerLogoutAdmin = async function() {
+            await signOut(auth);
+            alert("Você saiu do painel administrativo.");
+            mudarPagina('home');
+        }
 
         window.mudarPagina = function(paginaId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -393,6 +450,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if (paginaId === 'avaliacoes') {
                 carregarAvaliacoes();
+            } else if (paginaId === 'admin') {
+                // Se for para o admin, atualiza a listagem se logado
+                carregarProdutosAdmin();
             }
         }
 
@@ -406,15 +466,13 @@
             const modal = document.getElementById('modal-zoom');
             const modalImg = document.getElementById('modal-img');
             const modalCaption = document.getElementById('modal-caption');
-            
             modalImg.src = imgSrc;
             modalCaption.textContent = legenda;
             modal.classList.add('active');
         }
 
         window.fecharZoom = function() {
-            const modal = document.getElementById('modal-zoom');
-            modal.classList.remove('active');
+            document.getElementById('modal-zoom').classList.remove('active');
         }
 
         window.abrirModalAvaliacao = function() {
@@ -427,7 +485,194 @@
             document.getElementById('modal-avaliacao').classList.add('hidden');
         }
 
-        // Função para carregar as avaliações direto do Firebase
+        // Funções do Banco de Dados para os Produtos
+        window.carregarProdutosSite = async function() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "produtos"));
+                let combos = [];
+                let acessorios = [];
+                let variedades = [];
+
+                querySnapshot.forEach((docSnap) => {
+                    let p = docSnap.data();
+                    p.idDoc = docSnap.id;
+                    if (p.categoria === 'combos') combos.push(p);
+                    if (p.categoria === 'acessorios') acessorios.push(p);
+                    if (p.categoria === 'variedades') variedades.push(p);
+                });
+
+                // Renderiza Combos
+                const boxCombos = document.getElementById('carrossel-combos');
+                if (boxCombos) {
+                    if (combos.length === 0) boxCombos.innerHTML = "<p class='text-xs text-neutral-400'>Nenhum combo cadastrado.</p>";
+                    else {
+                        boxCombos.innerHTML = combos.map(c => `
+                            <div class="combo-card card-custom p-4 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <div class="overflow-hidden rounded-xl mb-3 bg-neutral-900 relative group h-40">
+                                        <img src="${c.img}" alt="${c.nome}" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition duration-300" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${c.nome}')">
+                                        <span class="absolute top-2 left-2 gold-bg text-[10px] font-black px-2 py-0.5 rounded-md">COMBO</span>
+                                    </div>
+                                    <h4 class="font-bold text-sm text-white line-clamp-1">${c.nome}</h4>
+                                    <p class="text-[11px] text-neutral-400 mt-1 mb-3 line-clamp-3 leading-relaxed">${c.descricao}</p>
+                                </div>
+                                <div>
+                                    <span class="text-lg font-black gold-text block mb-3">${c.preco}</span>
+                                    <button onclick="comprarItem('${c.nome}', '${c.preco}')" class="w-full gold-bg font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                                        <i class="fa-brands fa-whatsapp text-base"></i> Garantir Pedido
+                                    </button>
+                                </div>
+                            </div>`).join('');
+                    }
+                }
+
+                // Renderiza Acessórios
+                const boxAcessorios = document.getElementById('grid-acessorios');
+                if (boxAcessorios) {
+                    if (acessorios.length === 0) boxAcessorios.innerHTML = "<p class='text-xs text-neutral-400'>Nenhum acessório cadastrado.</p>";
+                    else {
+                        boxAcessorios.innerHTML = acessorios.map(p => `
+                            <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
+                                        <img src="${p.img}" alt="${p.nome}" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome}')">
+                                    </div>
+                                    <h3 class="font-bold text-lg text-white">${p.nome}</h3>
+                                    <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">${p.descricao}</p>
+                                </div>
+                                <div>
+                                    <span class="text-xl font-black gold-text block mb-4">${p.preco}</span>
+                                    <button onclick="comprarItem('${p.nome}', '${p.preco}')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
+                                    </button>
+                                </div>
+                            </div>`).join('');
+                    }
+                }
+
+                // Renderiza Variedades
+                const boxVariedades = document.getElementById('grid-variedades');
+                if (boxVariedades) {
+                    if (variedades.length === 0) boxVariedades.innerHTML = "<p class='text-xs text-neutral-400'>Nenhuma variedade cadastrada.</p>";
+                    else {
+                        boxVariedades.innerHTML = variedades.map(p => `
+                            <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
+                                        <img src="${p.img}" alt="${p.nome}" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome}')">
+                                    </div>
+                                    <h3 class="font-bold text-lg text-white">${p.nome}</h3>
+                                    <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">${p.descricao}</p>
+                                </div>
+                                <div class="mt-auto">
+                                    <span class="text-xl font-black gold-text block mb-4">${p.preco}</span>
+                                    <button onclick="comprarItem('${p.nome}', '${p.preco}')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
+                                        <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
+                                    </button>
+                                </div>
+                            </div>`).join('');
+                    }
+                }
+
+            } catch (error) {
+                console.error("Erro ao carregar produtos:", error);
+            }
+        }
+
+        window.comprarItem = function(nome, preco) {
+            const telefone = "5582999129161";
+            let mensagem = `Salve, TH Imports! Tenho interesse no produto:\n\n*${nome}*\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega grátis em maceio!`;
+            window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
+        }
+
+        // Funções Exclusivas do Painel Admin (Protegidas pelo Firebase Auth)
+        window.adicionarProdutoBanco = async function(event) {
+            event.preventDefault();
+            const nome = document.getElementById('novo-nome').value.trim();
+            const preco = document.getElementById('novo-preco').value.trim();
+            const categoria = document.getElementById('novo-categoria').value;
+            const img = document.getElementById('novo-img').value.trim();
+            const descricao = document.getElementById('novo-desc').value.trim();
+
+            try {
+                await addDoc(collection(db, "produtos"), { nome, preco, categoria, img, descricao });
+                alert("Produto cadastrado com sucesso!");
+                event.target.reset();
+                carregarProdutosAdmin();
+                carregarProdutosSite();
+            } catch (error) {
+                alert("Erro ao salvar! Verifique se você está logado corretamente.");
+                console.error(error);
+            }
+        }
+
+        window.carregarProdutosAdmin = async function() {
+            const listaDiv = document.getElementById('admin-lista-produtos');
+            if (!listaDiv) return;
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "produtos"));
+                listaDiv.innerHTML = "";
+
+                if (querySnapshot.empty) {
+                    listaDiv.innerHTML = "<p class='text-xs text-neutral-400'>Nenhum produto cadastrado no banco.</p>";
+                    return;
+                }
+
+                querySnapshot.forEach((docSnap) => {
+                    let p = docSnap.data();
+                    let id = docSnap.id;
+                    const div = document.createElement('div');
+                    div.className = "card-custom p-4 rounded-xl flex flex-col justify-between gap-3";
+                    div.innerHTML = `
+                        <div>
+                            <span class="text-[10px] bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded uppercase font-bold">${p.categoria}</span>
+                            <h4 class="font-bold text-white text-sm mt-1">${p.nome}</h4>
+                            <p class="text-xs gold-text font-black">${p.preco}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" id="preco-edit-${id}" value="${p.preco}" class="w-1/2 bg-neutral-900 border border-neutral-800 rounded p-1.5 text-xs text-white">
+                            <button onclick="atualizarPreco('${id}')" class="w-1/2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-1.5 rounded transition">Atualizar Preço</button>
+                            <button onclick="excluirProduto('${id}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                    listaDiv.appendChild(div);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar painel admin:", error);
+            }
+        }
+
+        window.atualizarPreco = async function(id) {
+            const novoPreco = document.getElementById(`preco-edit-${id}`).value.trim();
+            if (!novoPreco) return;
+
+            try {
+                await updateDoc(doc(db, "produtos", id), { preco: novoPreco });
+                alert("Preço atualizado com sucesso!");
+                carregarProdutosAdmin();
+                carregarProdutosSite();
+            } catch (error) {
+                alert("Erro ao atualizar preço. Sem permissão.");
+                console.error(error);
+            }
+        }
+
+        window.excluirProduto = async function(id) {
+            if (!confirm("Tem certeza que deseja excluir este produto?")) return;
+
+            try {
+                await deleteDoc(doc(db, "produtos", id));
+                alert("Produto removido com sucesso!");
+                carregarProdutosAdmin();
+                carregarProdutosSite();
+            } catch (error) {
+                alert("Erro ao excluir produto. Sem permissão.");
+                console.error(error);
+            }
+        }
+
+        // Sistema de Avaliações
         window.carregarAvaliacoes = async function() {
             const container = document.getElementById('grid-avaliacoes');
             if (!container) return;
@@ -462,11 +707,9 @@
                 });
             } catch (error) {
                 console.error("Erro ao carregar avaliações:", error);
-                container.innerHTML = "<p class='text-xs text-red-400'>Erro ao carregar avaliações do banco de dados.</p>";
             }
         }
 
-        // Função para enviar avaliação direto para o Firebase sem mexer em token do GitHub
         window.enviarAvaliacao = async function(event) {
             event.preventDefault();
             const nome = document.getElementById('aval-nome').value.trim();
@@ -479,157 +722,23 @@
 
             try {
                 await addDoc(collection(db, "avaliacoes"), {
-                    nome: nome,
-                    nota: nota,
-                    comentario: comentario,
-                    data: new Date()
+                    nome, nota, comentario, data: new Date()
                 });
-
                 alert("Avaliação publicada com sucesso!");
                 fecharModalAvaliacao();
                 document.getElementById('form-avaliacao').reset();
                 carregarAvaliacoes();
             } catch (error) {
-                console.error("Erro ao salvar:", error);
-                alert("Erro ao enviar avaliação. Tente novamente.");
+                alert("Erro ao enviar avaliação.");
+                console.error(error);
             } finally {
                 btnEnviar.textContent = "Publicar Avaliação";
                 btnEnviar.disabled = false;
             }
         }
 
-        window.comprarCombo = function(id, nome, preco) {
-            const telefone = "5582999129161";
-            let detalheModelo = "";
-            const inputEl = document.getElementById('input-' + id);
-            if (inputEl) {
-                const valorInput = inputEl.value.trim();
-                if (valorInput !== "") {
-                    detalheModelo = ` (Modelo: ${valorInput})`;
-                } else {
-                    alert("Por favor, digite o modelo do seu celular antes de prosseguir!");
-                    inputEl.focus();
-                    return;
-                }
-            }
-            let mensagem = `Salve, TH Imports! Tenho interesse no combo:\n\n*${nome}*${detalheModelo}\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega grátis em maceio!`;
-            window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
-        }
-
-        window.comprarProduto = function(id, nome, preco) {
-            const telefone = "5582999129161";
-            let detalheModelo = "";
-            const inputEl = document.getElementById('input-' + id);
-            if (inputEl) {
-                const valorInput = inputEl.value.trim();
-                if (valorInput !== "") {
-                    detalheModelo = ` (Modelo: ${valorInput})`;
-                } else {
-                    alert("Por favor, digite o modelo do seu celular antes de prosseguir!");
-                    inputEl.focus();
-                    return;
-                }
-            }
-            let mensagem = `Salve, TH Imports! Tenho interesse no produto:\n\n*${nome}*${detalheModelo}\nPreço: *${preco}*\n\nGostaria de fechar o pedido com entrega grátis em maceio!`;
-            window.open(`https://api.whatsapp.com/send?phone=${telefone}&text=${encodeURIComponent(mensagem)}`, '_blank');
-        }
-
-        function renderizarTudo() {
-            document.getElementById('carrossel-combos').innerHTML = combosImperdiveis.map(c => {
-                let inputExtraHtml = '';
-                if (c.requerModeloIphone) {
-                    inputExtraHtml = `<div class="mb-3"><label class="text-[10px] text-neutral-400 block mb-1 font-bold">Modelo do iPhone:</label><input type="text" id="input-${c.id}" placeholder="Ex: iPhone 13, 14 Pro..." class="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-2 text-xs text-white focus:border-[#d4af37] outline-none"></div>`;
-                } else if (c.requerModeloCelular) {
-                    inputExtraHtml = `<div class="mb-3"><label class="text-[10px] text-neutral-400 block mb-1 font-bold">Modelo do Aparelho:</label><input type="text" id="input-${c.id}" placeholder="Ex: Samsung S23..." class="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-2 text-xs text-white focus:border-[#d4af37] outline-none"></div>`;
-                }
-                return `
-                <div class="combo-card card-custom p-4 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="overflow-hidden rounded-xl mb-3 bg-neutral-900 relative group h-40">
-                            <img src="${c.img}" alt="${c.nome}" class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition duration-300" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${c.nome}')">
-                            <span class="absolute top-2 left-2 gold-bg text-[10px] font-black px-2 py-0.5 rounded-md">COMBO</span>
-                        </div>
-                        <h4 class="font-bold text-sm text-white line-clamp-1">${c.nome}</h4>
-                        <p class="text-[11px] text-neutral-400 mt-1 mb-3 line-clamp-3 leading-relaxed">${c.descricao}</p>
-                    </div>
-                    <div>
-                        ${inputExtraHtml}
-                        <span class="text-lg font-black gold-text block mb-3">${c.preco}</span>
-                        <button onclick="comprarCombo('${c.id}', '${c.nome}', '${c.preco}')" class="w-full gold-bg font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
-                            <i class="fa-brands fa-whatsapp text-base"></i> Garantir Pedido
-                        </button>
-                    </div>
-                </div>`;
-            }).join('');
-
-            document.getElementById('grid-acessorios').innerHTML = produtosAcessorios.map(p => {
-                let inputExtraHtml = '';
-                if (p.requerModeloIphone) {
-                    inputExtraHtml = `<div class="mb-4"><label class="text-xs text-neutral-400 block mb-1 font-bold">Qual o modelo do seu iPhone?</label><input type="text" id="input-${p.id}" placeholder="Ex: iPhone 13, 14 Pro..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none"></div>`;
-                } else if (p.requerModeloAndroid) {
-                    inputExtraHtml = `<div class="mb-4"><label class="text-xs text-neutral-400 block mb-1 font-bold">Qual o modelo do seu Android?</label><input type="text" id="input-${p.id}" placeholder="Ex: Samsung S23..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none"></div>`;
-                }
-                return `
-                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
-                            <img src="${p.img}" alt="${p.nome}" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome}')">
-                            <div class="absolute bottom-2 right-2 bg-black/70 text-[10px] text-white px-2 py-1 rounded-md pointer-events-none opacity-0 group-hover:opacity-100 transition">🔍 Ampliar</div>
-                        </div>
-                        <h3 class="font-bold text-lg text-white">${p.nome}</h3>
-                        <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">${p.descricao}</p>
-                    </div>
-                    <div>
-                        ${inputExtraHtml}
-                        <span class="text-xl font-black gold-text block mb-4">${p.preco}</span>
-                        <button onclick="comprarProduto('${p.id}', '${p.nome}', '${p.preco}')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
-                        </button>
-                    </div>
-                </div>`;
-            }).join('');
-
-            document.getElementById('grid-variedades').innerHTML = produtosVariedades.map(p => {
-                let imagemHtml = '';
-                if (p.imgs) {
-                    imagemHtml = `
-                        <div class="grid grid-cols-2 gap-2 mb-4">
-                            <div class="overflow-hidden rounded-xl bg-neutral-900 relative group">
-                                <img src="${p.imgs[0]}" alt="${p.nome} 1" class="img-produto h-[170px]" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome} (Foto 1)')">
-                            </div>
-                            <div class="overflow-hidden rounded-xl bg-neutral-900 relative group">
-                                <img src="${p.imgs[1]}" alt="${p.nome} 2" class="img-produto h-[170px]" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome} (Foto 2)')">
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    imagemHtml = `
-                        <div class="overflow-hidden rounded-xl mb-4 bg-neutral-900 relative group">
-                            <img src="${p.img}" alt="${p.nome}" class="img-produto" onerror="tratarErroImagem(this)" onclick="abrirZoom(this.src, '${p.nome}')">
-                            <div class="absolute bottom-2 right-2 bg-black/70 text-[10px] text-white px-2 py-1 rounded-md pointer-events-none opacity-0 group-hover:opacity-100 transition">🔍 Ampliar</div>
-                        </div>
-                    `;
-                }
-
-                return `
-                <div class="card-custom p-5 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        ${imagemHtml}
-                        <h3 class="font-bold text-lg text-white">${p.nome}</h3>
-                        <p class="text-xs text-neutral-400 mt-2 mb-4 leading-relaxed">${p.descricao}</p>
-                    </div>
-                    <div class="mt-auto">
-                        <span class="text-xl font-black gold-text block mb-4">${p.preco}</span>
-                        <button onclick="comprarProduto('${p.id}', '${p.nome}', '${p.preco}')" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center gap-2 hover:opacity-90 transition shadow-md">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> Comprar no WhatsApp
-                        </button>
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
         window.onload = function() {
-            renderizarTudo();
+            carregarProdutosSite();
             carregarAvaliacoes();
         };
     </script>
