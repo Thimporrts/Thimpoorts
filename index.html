@@ -162,7 +162,7 @@
                             <h4 class="font-bold text-xl text-white group-hover:text-[#d4af37] transition flex items-center justify-between">
                                 Variedades & Eletrônicos <i class="fa-solid fa-chevron-right text-xs text-neutral-500 group-hover:text-[#d4af37]"></i>
                             </h4>
-                            <p class="text-xs text-neutral-400 mt-2">Kits churrasco premium, smartwatches, caixas de sem RGB, ferramentas e muito mais.</p>
+                            <p class="text-xs text-neutral-400 mt-2">Kits churrasco premium, smartwatches, caixas de som RGB, ferramentas e muito mais.</p>
                         </div>
                     </div>
                     <div class="px-6 pb-6">
@@ -322,14 +322,19 @@
         </div>
     </div>
 
-    <!-- MODAL DO PAINEL ADMIN (Mudar Preço e Imagem) -->
+    <!-- MODAL DO PAINEL ADMIN (Mudar Preço e Escolher Imagem do PC) -->
     <div id="modal-admin" class="fixed inset-0 z-50 bg-black/85 hidden items-center justify-center p-4">
         <div class="card-custom max-w-2xl w-full p-6 rounded-2xl relative border gold-border max-h-[90vh] flex flex-col">
             <button onclick="fecharPainelAdmin()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
                 <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <h3 class="text-xl font-black gold-text mb-1"><i class="fa-solid fa-sliders mr-2"></i> Painel de Controle - Produtos</h3>
-            <p class="text-xs text-neutral-400 mb-4">Altere o preço ou a imagem (URL) de qualquer item do catálogo em tempo real.</p>
+            <div class="flex items-center justify-between mb-1">
+                <h3 class="text-xl font-black gold-text"><i class="fa-solid fa-sliders mr-2"></i> Painel de Controle - Produtos</h3>
+                <button onclick="fazerLogoutAdmin()" class="bg-red-600/80 hover:bg-red-600 text-white font-bold py-1.5 px-3 rounded-xl text-[11px] transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-lock"></i> Sair / Bloquear
+                </button>
+            </div>
+            <p class="text-xs text-neutral-400 mb-4">Altere o preço ou clique para enviar uma foto do seu dispositivo para qualquer item.</p>
             
             <div class="mb-4">
                 <input type="text" id="admin-search" oninput="filtrarProdutosAdmin()" placeholder="Pesquisar produto por nome..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-xs text-white focus:border-[#d4af37] outline-none">
@@ -368,16 +373,13 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // SENHA DO ADMINISTRADOR
         const SENHA_ADMIN = "thimports2026";
 
-        // Contador para cliques secretos na logo
         let cliquesLogo = 0;
         let tempoUltimoClique = 0;
 
         window.tratarCliqueLogo = function() {
             const agora = new Date().getTime();
-            // Se passar mais de 1.5 segundos entre os cliques, reseta a contagem
             if (agora - tempoUltimoClique > 1500) {
                 cliquesLogo = 1;
             } else {
@@ -391,7 +393,6 @@
             }
         }
 
-        // Bases de Produtos originais
         const combosImperdiveisBase = [
             { id: "combo-perfeito-35", cat: "combo", nome: "Combo Perfeito (R$ 35)", preco: "R$ 35,00", img: "combo-perfeito-35.jpg", descricao: "Combo especial selecionado com excelente custo-benefício e qualidade garantida TH Imports.", requerModeloCelular: true },
             { id: "capinhas-iphone-24", cat: "combo", nome: "Capinhas para iPhone", preco: "R$ 24,90", img: "capinhas-iphone-24.jpg", descricao: "Diversos Modelos (Transparente, Magsafe, Carbono, Silicone, Colorida e Fosca). Encaixe perfeito, leve e confortável.", requerModeloIphone: true },
@@ -427,7 +428,6 @@
             { id: "garrafa-termica", cat: "variedade", nome: "Garrafa térmica", preco: "R$ 69,90", img: "garrafa-termica.jpg", descricao: "Parede dupla em aço inox: mantém a água gelada ou o café quente por horas." }
         ];
 
-        // Carregar modificações salvas do localStorage se existirem
         function carregarDadosSalvos() {
             const salvo = localStorage.getItem('th_imports_produtos_mod');
             if (salvo) {
@@ -492,7 +492,6 @@
             document.getElementById('modal-avaliacao').classList.add('hidden');
         }
 
-        // Funções do Painel Admin com Senha Secreta
         window.abrirPainelAdmin = function() {
             if (sessionStorage.getItem('th_admin_autenticado') === 'true') {
                 abrirPainelDireto();
@@ -523,6 +522,12 @@
             }
         }
 
+        window.fazerLogoutAdmin = function() {
+            sessionStorage.removeItem('th_admin_autenticado');
+            fecharPainelAdmin();
+            alert("Painel bloqueado com sucesso!");
+        }
+
         function abrirPainelDireto() {
             document.getElementById('modal-admin').classList.remove('hidden');
             document.getElementById('modal-admin').classList.add('flex');
@@ -543,7 +548,9 @@
             
             container.innerHTML = filtrados.map(p => `
                 <div class="bg-neutral-900 border border-neutral-800 p-3 rounded-xl flex flex-col sm:flex-row items-center gap-3">
-                    <img src="${p.img}" class="w-14 h-14 object-cover rounded-lg border border-neutral-700 shrink-0" onerror="this.src='reserva12.jpg'">
+                    <img id="admin-preview-${p.id}" src="${p.img}" class="w-14 h-14 object-cover rounded-lg border border-neutral-700 shrink-0 cursor-pointer" title="Clique para trocar a foto" onclick="document.getElementById('file-input-${p.id}').click()" onerror="this.src='reserva12.jpg'">
+                    <input type="file" id="file-input-${p.id}" accept="image/*" class="hidden" onchange="tratarEscolhaArquivo(event, '${p.id}')">
+                    
                     <div class="flex-grow w-full">
                         <h4 class="font-bold text-xs text-white mb-1">${p.nome}</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -552,14 +559,34 @@
                                 <input type="text" id="admin-preco-${p.id}" value="${p.preco}" class="w-full bg-neutral-950 border border-neutral-800 rounded p-1.5 text-xs text-white outline-none focus:border-[#d4af37]">
                             </div>
                             <div>
-                                <label class="text-[9px] text-neutral-400 block">Link da Imagem:</label>
-                                <input type="text" id="admin-img-${p.id}" value="${p.img}" class="w-full bg-neutral-950 border border-neutral-800 rounded p-1.5 text-xs text-white outline-none focus:border-[#d4af37]">
+                                <label class="text-[9px] text-neutral-400 block">Foto do Dispositivo:</label>
+                                <button type="button" onclick="document.getElementById('file-input-${p.id}').click()" class="w-full bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded p-1.5 text-xs font-bold transition flex items-center justify-center gap-1">
+                                    <i class="fa-solid fa-camera"></i> Escolher Foto
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <button onclick="salvarProdutoAdmin('${p.id}')" class="gold-bg font-bold py-2 px-3 rounded-lg text-xs shrink-0 self-end sm:self-center">Salvar</button>
+                    <button onclick="salvarProdutoAdmin('${p.id}')" class="gold-bg font-bold py-2 px-3 rounded-lg text-xs shrink-0 self-end sm:self-center shadow">Salvar</button>
                 </div>
             `).join('');
+        }
+
+        // Converte a imagem escolhida do PC em Base64 para salvar e exibir na hora
+        window.tratarEscolhaArquivo = function(event, id) {
+            const arquivo = event.target.files[0];
+            if (arquivo) {
+                const leitor = new FileReader();
+                leitor.onload = function(e) {
+                    const base64Img = e.target.result;
+                    // Atualiza a pré-visualização no painel admin na hora
+                    const preview = document.getElementById(`admin-preview-${id}`);
+                    if (preview) preview.src = base64Img;
+
+                    // Salva temporariamente no elemento dataset para salvar no botão
+                    preview.dataset.novaImg = base64Img;
+                }
+                leitor.readAsDataURL(arquivo);
+            }
         }
 
         window.filtrarProdutosAdmin = function() {
@@ -569,7 +596,8 @@
 
         window.salvarProdutoAdmin = function(id) {
             const novoPreco = document.getElementById(`admin-preco-${id}`).value.trim();
-            const novaImg = document.getElementById(`admin-img-${id}`).value.trim();
+            const preview = document.getElementById(`admin-preview-${id}`);
+            const novaImg = preview.dataset.novaImg ? preview.dataset.novaImg : preview.src;
 
             let salvo = localStorage.getItem('th_imports_produtos_mod');
             let mods = salvo ? JSON.parse(salvo) : {};
@@ -579,7 +607,7 @@
 
             carregarDadosSalvos();
             renderizarTudo();
-            alert("Produto atualizado com sucesso!");
+            alert("Produto e imagem atualizados com sucesso!");
         }
 
         window.carregarAvaliacoes = async function() {
@@ -785,3 +813,4 @@
     </script>
 </body>
 </html>
+
