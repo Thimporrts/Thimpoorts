@@ -1,362 +1,252 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TH IMPORTS - Catálogo Oficial</title>
+    <title>TH Imports - Acessórios e Variedades</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#d4af37',
+                            light: '#f3e5ab',
+                            dark: '#aa8c2c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { background-color: #080808; color: #f1f1f1; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .gold-text { color: #d4af37; }
-        .gold-bg { background-color: #d4af37; color: #000; }
-        .gold-border { border-color: #d4af37; }
-        .card-custom { background-color: #121212; border: 1px solid #222; transition: all 0.3s ease; }
-        .card-custom:hover { border-color: #d4af37; transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.1); }
-        .page { display: none; }
-        .page.active { display: block; }
+        .gold-gradient {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-text {
+            color: #d4af37;
+        }
+        .gold-bg {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+            color: #000;
+        }
+        .gold-bg:hover {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+        }
+        .card-custom {
+            background: rgba(18, 18, 18, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .card-custom:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.15);
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
         .img-produto {
             width: 100%;
             height: 220px;
             object-fit: cover;
-            border-radius: 0.75rem;
-            background-color: #0f0f0f;
             cursor: pointer;
-            transition: opacity 0.2s ease;
+            transition: transform 0.3s ease;
         }
-        .img-produto:hover { opacity: 0.9; }
-
-        .ifood-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 1rem;
-            padding-bottom: 1rem;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: thin;
-            scrollbar-color: #d4af37 #1a1a1a;
-        }
-        .ifood-scroll::-webkit-scrollbar { height: 6px; }
-        .ifood-scroll::-webkit-scrollbar-track { background: #121212; border-radius: 4px; }
-        .ifood-scroll::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
-        .combo-card { min-width: 280px; max-width: 300px; flex: 0 0 auto; scroll-snap-align: start; }
-        
-        #modal-zoom {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        #modal-zoom.active { display: flex; }
-        #modal-img {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 12px;
-            border: 2px solid #d4af37;
-            object-fit: contain;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        .img-produto:hover {
+            transform: scale(1.03);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
+<body class="bg-neutral-950 text-neutral-100 min-h-screen flex flex-col font-sans selection:bg-[#d4af37] selection:text-black">
 
-    <header class="border-b border-neutral-800 py-3 sm:py-4 px-4 sticky top-0 bg-[#080808]/95 backdrop-blur z-50 shadow-2xl">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <!-- LOGO COM CLIQUE SECRETO (4 vezes) -->
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-neutral-950/85 backdrop-blur-md border-b border-neutral-900">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3 cursor-pointer select-none" onclick="tratarCliqueLogo()">
-                <img id="logo-img-header" src="logo.jpg" alt="TH Imports Logo" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 gold-border object-cover shadow-lg pointer-events-none" onerror="this.onerror=null; this.src='reserva12.jpg'">
+                <div class="w-10 h-10 rounded-xl gold-bg flex items-center justify-center font-black text-xl shadow-lg">
+                    TH
+                </div>
                 <div>
-                    <h1 class="text-lg sm:text-xl font-black tracking-wider gold-text uppercase">TH IMPORTS</h1>
-                    <p class="text-[10px] text-neutral-400">⚡ Maceió Grátis</p>
+                    <h1 class="font-black text-lg tracking-wider gold-gradient">TH IMPORTS</h1>
+                    <p class="text-[10px] text-neutral-400 font-medium tracking-widest uppercase">Acessórios & Variedades</p>
                 </div>
             </div>
             
-            <nav class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-3 text-xs font-bold">
-                <button onclick="mudarPagina('home')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-house mr-1"></i> Início</button>
-                <button onclick="mudarPagina('acessorios')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-mobile-screen mr-1"></i> Acessórios</button>
-                <button onclick="mudarPagina('variedades')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-box-open mr-1"></i> Variedades</button>
-                <button onclick="mudarPagina('avaliacoes')" class="hover:text-[#d4af37] transition px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800"><i class="fa-solid fa-star mr-1"></i> Avaliações</button>
-                <button onclick="mudarPagina('contato')" class="gold-bg px-3 py-1.5 rounded-lg shadow transition hover:opacity-90"><i class="fa-solid fa-headset mr-1"></i> Contato</button>
+            <nav class="flex items-center gap-2 bg-neutral-900/80 p-1.5 rounded-2xl border border-neutral-800">
+                <button onclick="mudarPagina('catalogo')" id="btn-cat" class="px-4 py-2 rounded-xl text-xs font-bold transition gold-bg shadow-sm">Catálogo</button>
+                <button onclick="mudarPagina('avaliacoes')" id="btn-aval" class="px-4 py-2 rounded-xl text-xs font-bold text-neutral-300 hover:text-white transition">Avaliações</button>
             </nav>
         </div>
     </header>
 
-    <main class="max-w-6xl w-full mx-auto p-3 sm:p-6 flex-grow">
-
-        <div id="page-home" class="page active">
-            <div class="gold-bg text-black font-extrabold text-center py-3 px-4 rounded-xl mb-6 text-xs sm:text-sm shadow-md tracking-wide flex items-center justify-center gap-2">
-                <i class="fa-solid fa-bolt"></i> Frete Grátis para toda Maceió! Confira os destaques abaixo:
-            </div>
-
-            <section class="mb-10">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-                        <i class="fa-solid fa-fire gold-text"></i> Combos e Destaques
-                    </h3>
-                    <span class="text-xs text-neutral-400 hidden sm:inline"><i class="fa-solid fa-arrow-right-arrow-left"></i> Arraste para o lado</span>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
+        
+        <!-- PÁGINA: CATÁLOGO -->
+        <div id="page-catalogo" class="page active space-y-12">
+            <!-- DESTAQUE / HERO -->
+            <div class="relative overflow-hidden rounded-3xl p-8 sm:p-12 card-custom text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 border-gold/30">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-[#d4af37]/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="space-y-3 z-10 max-w-lg">
+                    <span class="bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest border border-[#d4af37]/20">Entrega Grátis em Maceió</span>
+                    <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">Qualidade e Preço Justo em um Só Lugar</h2>
+                    <p class="text-xs sm:text-sm text-neutral-400 leading-relaxed">As melhores capinhas, acessórios para celular e variedades exclusivas com atendimento imediato via WhatsApp.</p>
                 </div>
-                <p class="text-xs text-neutral-400 mb-4">Aproveite nossos kits e produtos em evidência com imagens exclusivas.</p>
-
-                <div class="ifood-scroll pt-2" id="carrossel-combos"></div>
-            </section>
-
-            <div class="card-custom p-6 md:p-8 rounded-2xl mb-8 border-l-4 gold-border relative overflow-hidden bg-gradient-to-r from-[#121212] to-[#1a1608]">
-                <div class="absolute -right-10 -bottom-10 text-neutral-900 text-9xl opacity-20 pointer-events-none">
-                    <i class="fa-solid fa-crown"></i>
-                </div>
-                <h2 class="text-2xl font-black gold-text mb-4 flex items-center gap-3">
-                    <i class="fa-solid fa-crown"></i> A Origem da TH Imports
-                </h2>
-                <p class="text-sm text-neutral-300 leading-relaxed mb-6">
-                    Fundada no coração de Maceió, a <strong>TH Imports</strong> traz acessórios de alto padrão e novidades tecnológicas por preços justos e acessíveis. Referência em velocidade, confiança e atendimento diferenciado.
-                </p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-neutral-800 pt-6 text-center">
-                    <div class="bg-neutral-900/60 p-4 rounded-xl border border-neutral-800">
-                        <span class="block text-xl font-black gold-text">⚡ Rápido</span>
-                        <span class="text-xs text-neutral-400">Atendimento Direto no WhatsApp</span>
-                    </div>
-                    <div class="bg-neutral-900/60 p-4 rounded-xl border border-neutral-800">
-                        <span class="block text-xl font-black gold-text">🛵 Grátis</span>
-                        <span class="text-xs text-neutral-400">Entrega Grátis em Maceió</span>
-                    </div>
-                    <div class="bg-neutral-900/60 p-4 rounded-xl border border-neutral-800">
-                        <span class="block text-xl font-black gold-text">💎 Premium</span>
-                        <span class="text-xs text-neutral-400">Qualidade Garantida e Testada</span>
-                    </div>
-                </div>
-            </div>
-
-            <h3 class="text-2xl font-bold text-white mb-6">Categorias Principais</h3>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div onclick="mudarPagina('acessorios')" class="card-custom rounded-2xl cursor-pointer overflow-hidden group flex flex-col justify-between">
-                    <div>
-                        <div class="overflow-hidden h-52 bg-neutral-900">
-                            <img src="capa-acessorios.jpg" alt="Acessórios para Celular" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='reserva12.jpg'">
-                        </div>
-                        <div class="p-6">
-                            <h4 class="font-bold text-xl text-white group-hover:text-[#d4af37] transition flex items-center justify-between">
-                                Acessórios para Celular <i class="fa-solid fa-chevron-right text-xs text-neutral-500 group-hover:text-[#d4af37]"></i>
-                            </h4>
-                            <p class="text-xs text-neutral-400 mt-2">Capas de silicone toque aveludado, películas de privacidade, fones e carregadores super turbo.</p>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <span class="block text-center text-xs font-bold gold-bg py-2.5 rounded-xl shadow">Acessar Catálogo</span>
-                    </div>
-                </div>
-
-                <div onclick="mudarPagina('variedades')" class="card-custom rounded-2xl cursor-pointer overflow-hidden group flex flex-col justify-between">
-                    <div>
-                        <div class="overflow-hidden h-52 bg-neutral-900">
-                            <img src="capa-variedades.jpg" alt="Variedades & Eletrônicos" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.onerror=null; this.src='reserva12.jpg'">
-                        </div>
-                        <div class="p-6">
-                            <h4 class="font-bold text-xl text-white group-hover:text-[#d4af37] transition flex items-center justify-between">
-                                Variedades & Eletrônicos <i class="fa-solid fa-chevron-right text-xs text-neutral-500 group-hover:text-[#d4af37]"></i>
-                            </h4>
-                            <p class="text-xs text-neutral-400 mt-2">Kits churrasco premium, smartwatches, caixas de som RGB, ferramentas e muito mais.</p>
-                        </div>
-                    </div>
-                    <div class="px-6 pb-6">
-                        <span class="block text-center text-xs font-bold gold-bg py-2.5 rounded-xl shadow">Acessar Catálogo</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="page-acessorios" class="page">
-            <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
-                <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
-            </button>
-
-            <h2 class="text-3xl font-black gold-text mb-2">Acessórios para Celular</h2>
-            <p class="text-xs text-neutral-400 mb-8">Maximize a proteção e o desempenho do seu smartphone. Clique na foto para ampliar.</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-acessorios"></div>
-        </div>
-
-        <div id="page-variedades" class="page">
-            <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
-                <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
-            </button>
-
-            <h2 class="text-3xl font-black gold-text mb-2">Variedades & Eletrônicos</h2>
-            <p class="text-xs text-neutral-400 mb-8">Gadgets tecnológicos e utilidades exclusivas. Clique nas fotos para ampliar.</p>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="grid-variedades"></div>
-        </div>
-
-        <div id="page-avaliacoes" class="page">
-            <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
-                <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
-            </button>
-
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-                <div>
-                    <h2 class="text-3xl font-black gold-text mb-2">Avaliações dos Clientes</h2>
-                    <p class="text-xs text-neutral-400">Veja o que os clientes de Maceió estão falando sobre a TH Imports.</p>
-                </div>
-                <button onclick="abrirModalAvaliacao()" class="gold-bg font-bold py-2.5 px-4 rounded-xl text-xs flex items-center gap-2 shadow hover:opacity-90 transition">
-                    <i class="fa-solid fa-pen-to-square"></i> Deixar Avaliação
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grid-avaliacoes">
-                <p class="text-xs text-neutral-400">Carregando avaliações...</p>
-            </div>
-        </div>
-
-        <div id="page-contato" class="page">
-            <button onclick="mudarPagina('home')" class="mb-6 text-sm gold-text flex items-center gap-2 hover:underline font-bold">
-                <i class="fa-solid fa-arrow-left"></i> Voltar para o Menu Principal
-            </button>
-
-            <h2 class="text-3xl font-black gold-text mb-2">Central de Atendimento</h2>
-            <p class="text-xs text-neutral-400 mb-8">Fale diretamente com nossa equipe em Maceió para tirar dúvidas ou fechar pedidos.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl gold-bg flex items-center justify-center text-xl mb-4 shadow">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2">WhatsApp Oficial</h3>
-                        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">Atendimento ágil para reservas, confirmação de endereços para entrega grátis em maceio e dúvidas sobre produtos.</p>
-                    </div>
-                    <a href="https://wa.me/5582999129161?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20atendimento." target="_blank" class="w-full gold-bg font-bold py-3 px-4 rounded-xl text-sm text-center flex items-center justify-center gap-2 hover:opacity-90 transition shadow">
-                        <i class="fa-brands fa-whatsapp text-lg"></i> Chamar no WhatsApp
+                <div class="z-10 shrink-0">
+                    <a href="https://api.whatsapp.com/send?phone=5582999129161&text=Salve,%20TH%20Imports!%20Vim%20pelo%20site." target="_blank" class="gold-bg font-bold py-3 px-6 rounded-xl text-xs flex items-center gap-2 shadow-lg hover:opacity-90 transition">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Falar no WhatsApp
                     </a>
                 </div>
-
-                <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 gold-text flex items-center justify-center text-xl mb-4 shadow">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-2">Região de Atendimento</h3>
-                        <p class="text-xs text-neutral-400 mb-2 leading-relaxed">📍 Entregas rápidas e gratuitas (entrega grátis em maceio) em toda Maceió - AL.</p>
-                        <p class="text-xs text-neutral-400 mb-6 leading-relaxed">⏰ Horário de atendimento comercial online todos os dias.</p>
-                    </div>
-                    <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 text-center">
-                        <span class="text-xs font-bold text-neutral-300">Instagram: <span class="gold-text">@thimports_</span></span>
-                    </div>
-                </div>
             </div>
+
+            <!-- SEÇÃO: COMBOS IMPERDÍVEIS -->
+            <section class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-6 gold-bg rounded-full"></div>
+                    <h3 class="text-lg font-black tracking-wide text-white uppercase">Combos Imperdíveis</h3>
+                </div>
+                <div id="carrossel-combos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Preenchido via script -->
+                </div>
+            </section>
+
+            <!-- SEÇÃO: ACESSÓRIOS PARA CELULAR -->
+            <section class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-6 gold-bg rounded-full"></div>
+                    <h3 class="text-lg font-black tracking-wide text-white uppercase">Acessórios para Celular</h3>
+                </div>
+                <div id="grid-acessorios" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Preenchido via script -->
+                </div>
+            </section>
+
+            <!-- SEÇÃO: VARIEDADES EXCLUSIVAS -->
+            <section class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-6 gold-bg rounded-full"></div>
+                    <h3 class="text-lg font-black tracking-wide text-white uppercase">Variedades Exclusivas</h3>
+                </div>
+                <div id="grid-variedades" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Preenchido via script -->
+                </div>
+            </section>
         </div>
 
+        <!-- PÁGINA: AVALIAÇÕES -->
+        <div id="page-avaliacoes" class="page space-y-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-white">Avaliações de Clientes</h2>
+                    <p class="text-xs text-neutral-400 mt-1">Veja o que nossos clientes dizem sobre nossos produtos e atendimento.</p>
+                </div>
+                <button onclick="abrirModalAvaliacao()" class="gold-bg font-bold py-2.5 px-5 rounded-xl text-xs flex items-center gap-2 shadow hover:opacity-90 transition">
+                    <i class="fa-solid fa-star"></i> Avaliar Loja
+                </button>
+            </div>
+
+            <div id="grid-avaliacoes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Preenchido via script -->
+            </div>
+        </div>
     </main>
 
-    <div id="modal-zoom" onclick="fecharZoom()">
-        <div class="relative max-w-4xl mx-auto text-center" onclick="event.stopPropagation()">
-            <button onclick="fecharZoom()" class="absolute -top-10 right-0 text-white bg-neutral-800 hover:bg-neutral-700 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img id="modal-img" src="" alt="Zoom do Produto">
-            <p id="modal-caption" class="text-xs text-neutral-300 mt-3 font-bold"></p>
-        </div>
-    </div>
-
-    <!-- MODAL DE SENHA DO ADMIN -->
-    <div id="modal-senha-admin" class="fixed inset-0 z-50 bg-black/85 hidden items-center justify-center p-4">
-        <div class="card-custom max-w-sm w-full p-6 rounded-2xl relative border gold-border text-center">
-            <button onclick="fecharModalSenha()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="w-12 h-12 rounded-full gold-bg flex items-center justify-center text-xl mx-auto mb-4 shadow">
-                <i class="fa-solid fa-lock text-black"></i>
-            </div>
-            <h3 class="text-xl font-black gold-text mb-1">Painel Restrito</h3>
-            <p class="text-xs text-neutral-400 mb-6">Digite a senha de administrador para acessar o gerenciamento de preços e imagens.</p>
-            
-            <form onsubmit="verificarSenhaAdmin(event)">
-                <div class="mb-4">
-                    <input type="password" id="admin-senha-input" required placeholder="Digite a senha..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-sm text-center text-white focus:border-[#d4af37] outline-none tracking-widest">
-                </div>
-                <button type="submit" class="w-full gold-bg font-bold py-3 rounded-xl text-sm shadow hover:opacity-90 transition">
-                    Entrar no Painel
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL DE AVALIAÇÃO -->
-    <div id="modal-avaliacao" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4">
-        <div class="card-custom max-w-md w-full p-6 rounded-2xl relative border gold-border">
-            <button onclick="fecharModalAvaliacao()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <h3 class="text-xl font-black gold-text mb-2">Deixe sua Avaliação</h3>
-            <p class="text-xs text-neutral-400 mb-6">Sua opinião é fundamental para a TH Imports! Como foi sua experiência?</p>
-            
-            <form id="form-avaliacao" onsubmit="enviarAvaliacao(event)">
-                <div class="mb-4">
-                    <label class="block text-xs font-bold text-neutral-300 mb-1">Seu Nome:</label>
-                    <input type="text" id="aval-nome" required placeholder="Ex: Lucas Silva" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-xs font-bold text-neutral-300 mb-1">Nota (Estrelas):</label>
-                    <select id="aval-nota" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none">
-                        <option value="5">⭐⭐⭐⭐⭐ (5/5 - Excelente)</option>
-                        <option value="4">⭐⭐⭐⭐ (4/5 - Muito Bom)</option>
-                        <option value="3">⭐⭐⭐ (3/5 - Bom)</option>
-                        <option value="2">⭐⭐ (2/5 - Regular)</option>
-                        <option value="1">⭐ (1/5 - Ruim)</option>
-                    </select>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-xs font-bold text-neutral-300 mb-1">Seu Comentário:</label>
-                    <textarea id="aval-comentario" required rows="3" placeholder="Ex: Atendimento rápido e entrega grátis perfeita em Maceió!" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-sm text-white focus:border-[#d4af37] outline-none resize-none"></textarea>
-                </div>
-                <button type="submit" id="btn-enviar-aval" class="w-full gold-bg font-bold py-3 rounded-xl text-sm shadow hover:opacity-90 transition">
-                    Publicar Avaliação
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL DO PAINEL ADMIN (Mudar Preço e Escolher Imagem do PC) -->
-    <div id="modal-admin" class="fixed inset-0 z-50 bg-black/85 hidden items-center justify-center p-4">
-        <div class="card-custom max-w-2xl w-full p-6 rounded-2xl relative border gold-border max-h-[90vh] flex flex-col">
-            <button onclick="fecharPainelAdmin()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            <div class="flex items-center justify-between mb-1">
-                <h3 class="text-xl font-black gold-text"><i class="fa-solid fa-sliders mr-2"></i> Painel de Controle - Produtos</h3>
-                <button onclick="fazerLogoutAdmin()" class="bg-red-600/80 hover:bg-red-600 text-white font-bold py-1.5 px-3 rounded-xl text-[11px] transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-lock"></i> Sair / Bloquear
-                </button>
-            </div>
-            <p class="text-xs text-neutral-400 mb-4">Altere o preço ou clique para enviar uma foto do seu dispositivo para qualquer item.</p>
-            
-            <div class="mb-4">
-                <input type="text" id="admin-search" oninput="filtrarProdutosAdmin()" placeholder="Pesquisar produto por nome..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-xs text-white focus:border-[#d4af37] outline-none">
-            </div>
-
-            <div class="overflow-y-auto flex-grow space-y-3 pr-2" id="admin-lista-produtos">
-                <!-- Preenchido via JS -->
-            </div>
-
-            <div class="mt-4 pt-3 border-t border-neutral-800 flex justify-between items-center">
-                <span class="text-[10px] text-neutral-400">As alterações salvam no navegador automaticamente.</span>
-                <button onclick="fecharPainelAdmin()" class="gold-bg font-bold py-2 px-5 rounded-xl text-xs shadow">Fechar Painel</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="border-t border-neutral-800 text-center py-8 px-4 text-xs text-neutral-400 mt-16 bg-[#050505]">
-        <p class="font-bold text-neutral-200 text-sm">TH IMPORTS © 2026</p>
-        <p class="mt-1">Atendimento Oficial via WhatsApp: <a href="https://wa.me/5582999129161" class="gold-text underline font-bold">(82) 99912-9161</a></p>
-        <p class="mt-2 text-neutral-500">Maceió - Alagoas</p>
+    <!-- FOOTER -->
+    <footer class="border-t border-neutral-900 bg-neutral-950 mt-16 py-8 text-center text-xs text-neutral-500 space-y-2">
+        <p class="font-bold text-neutral-400">TH IMPORTS © 2026 - Todos os direitos reservados.</p>
+        <p>Atendimento rápido e personalizado via WhatsApp em Maceió/AL.</p>
     </footer>
 
+    <!-- MODAL ZOOM IMAGEM -->
+    <div id="modal-zoom" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+        <button onclick="fecharZoom()" class="absolute top-4 right-4 text-white text-2xl bg-neutral-900/80 hover:bg-neutral-800 w-10 h-10 rounded-full flex items-center justify-center transition">&times;</button>
+        <div class="max-w-2xl w-full flex flex-col items-center">
+            <img id="modal-img" src="" class="max-h-[75vh] max-w-full rounded-2xl object-contain border border-neutral-800 shadow-2xl mb-3">
+            <p id="modal-caption" class="text-xs text-neutral-400 font-medium text-center"></p>
+        </div>
+    </div>
+
+    <!-- MODAL AVALIAÇÃO -->
+    <div id="modal-avaliacao" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="card-custom max-w-md w-full p-6 rounded-3xl space-y-4 relative border-neutral-800">
+            <div class="flex items-center justify-between">
+                <h3 class="font-black text-base text-white">Deixe sua Avaliação</h3>
+                <button onclick="fecharModalAvaliacao()" class="text-neutral-400 hover:text-white text-xl">&times;</button>
+            </div>
+            <form id="form-avaliacao" onsubmit="enviarAvaliacao(event)" class="space-y-4">
+                <div>
+                    <label class="text-xs text-neutral-400 block mb-1 font-bold">Seu Nome:</label>
+                    <input type="text" id="aval-nome" required placeholder="Digite seu nome..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-xs text-white focus:border-[#d4af37] outline-none">
+                </div>
+                <div>
+                    <label class="text-xs text-neutral-400 block mb-1 font-bold">Nota (Estrelas):</label>
+                    <select id="aval-nota" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-xs text-white focus:border-[#d4af37] outline-none">
+                        <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+                        <option value="4">⭐⭐⭐⭐ (Muito Bom)</option>
+                        <option value="3">⭐⭐⭐ (Bom)</option>
+                        <option value="2">⭐⭐ (Regular)</option>
+                        <option value="1">⭐ (Ruim)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs text-neutral-400 block mb-1 font-bold">Seu Comentário:</label>
+                    <textarea id="aval-comentario" required rows="3" placeholder="O que achou do atendimento e do produto?" class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-xs text-white focus:border-[#d4af37] outline-none resize-none"></textarea>
+                </div>
+                <button type="submit" id="btn-enviar-aval" class="w-full gold-bg font-bold py-3 rounded-xl text-xs hover:opacity-90 transition shadow">Publicar Avaliação</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL SENHA ADMIN -->
+    <div id="modal-senha-admin" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="card-custom max-w-xs w-full p-6 rounded-3xl space-y-4 text-center border-neutral-800">
+            <h3 class="font-black text-sm text-white uppercase tracking-wider">Acesso Restrito</h3>
+            <p class="text-[11px] text-neutral-400">Digite a senha administrativa:</p>
+            <form onsubmit="verificarSenhaAdmin(event)" class="space-y-3">
+                <input type="password" id="admin-senha-input" required placeholder="Senha..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-xs text-white text-center focus:border-[#d4af37] outline-none">
+                <div class="flex gap-2">
+                    <button type="button" onclick="fecharModalSenha()" class="w-1/2 bg-neutral-900 hover:bg-neutral-800 text-neutral-300 font-bold py-2.5 rounded-xl text-xs transition">Cancelar</button>
+                    <button type="submit" class="w-1/2 gold-bg font-bold py-2.5 rounded-xl text-xs hover:opacity-90 transition">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL PAINEL ADMIN -->
+    <div id="modal-admin" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="card-custom max-w-4xl w-full h-[85vh] rounded-3xl flex flex-col p-6 border-neutral-800 relative overflow-hidden">
+            <div class="flex items-center justify-between pb-4 border-b border-neutral-800 shrink-0">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <h3 class="font-black text-sm text-white uppercase tracking-wider">Painel Administrativo - TH Imports</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="fazerLogoutAdmin()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-1.5 rounded-xl text-xs font-bold transition">Bloquear Painel</button>
+                    <button onclick="fecharPainelAdmin()" class="text-neutral-400 hover:text-white text-xl px-2">&times;</button>
+                </div>
+            </div>
+
+            <div class="py-4 shrink-0">
+                <input type="text" id="admin-search" oninput="filtrarProdutosAdmin()" placeholder="Pesquisar produto por nome..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-xs text-white focus:border-[#d4af37] outline-none">
+            </div>
+
+            <div id="admin-lista-produtos" class="flex-grow overflow-y-auto space-y-3 pr-2">
+                <!-- Preenchido via script -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE FUNCIONAMENTO E BANCO LOCAL -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -458,6 +348,15 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + paginaId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            document.getElementById('btn-cat').className = paginaId === 'catalogo' 
+                ? 'px-4 py-2 rounded-xl text-xs font-bold transition gold-bg shadow-sm' 
+                : 'px-4 py-2 rounded-xl text-xs font-bold text-neutral-300 hover:text-white transition';
+            
+            document.getElementById('btn-aval').className = paginaId === 'avaliacoes' 
+                ? 'px-4 py-2 rounded-xl text-xs font-bold transition gold-bg shadow-sm' 
+                : 'px-4 py-2 rounded-xl text-xs font-bold text-neutral-300 hover:text-white transition';
+
             if (paginaId === 'avaliacoes') {
                 carregarAvaliacoes();
             }
@@ -475,11 +374,14 @@
             const modalCaption = document.getElementById('modal-caption');
             modalImg.src = imgSrc;
             modalCaption.textContent = legenda;
-            modal.classList.add('active');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
         window.fecharZoom = function() {
-            document.getElementById('modal-zoom').classList.remove('active');
+            const modal = document.getElementById('modal-zoom');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
         }
 
         window.abrirModalAvaliacao = function() {
@@ -571,19 +473,17 @@
             `).join('');
         }
 
-        // Converte a imagem escolhida do PC em Base64 para salvar e exibir na hora
         window.tratarEscolhaArquivo = function(event, id) {
             const arquivo = event.target.files[0];
             if (arquivo) {
                 const leitor = new FileReader();
                 leitor.onload = function(e) {
                     const base64Img = e.target.result;
-                    // Atualiza a pré-visualização no painel admin na hora
                     const preview = document.getElementById(`admin-preview-${id}`);
-                    if (preview) preview.src = base64Img;
-
-                    // Salva temporariamente no elemento dataset para salvar no botão
-                    preview.dataset.novaImg = base64Img;
+                    if (preview) {
+                        preview.src = base64Img;
+                        preview.dataset.novaImg = base64Img;
+                    }
                 }
                 leitor.readAsDataURL(arquivo);
             }
@@ -597,17 +497,22 @@
         window.salvarProdutoAdmin = function(id) {
             const novoPreco = document.getElementById(`admin-preco-${id}`).value.trim();
             const preview = document.getElementById(`admin-preview-${id}`);
-            const novaImg = preview.dataset.novaImg ? preview.dataset.novaImg : preview.src;
+            const novaImg = preview.dataset.novaImg ? preview.dataset.novaImg : preview.getAttribute('src');
 
-            let salvo = localStorage.getItem('th_imports_produtos_mod');
-            let mods = salvo ? JSON.parse(salvo) : {};
+            try {
+                let salvo = localStorage.getItem('th_imports_produtos_mod');
+                let mods = salvo ? JSON.parse(salvo) : {};
 
-            mods[id] = { preco: novoPreco, img: novaImg };
-            localStorage.setItem('th_imports_produtos_mod', JSON.stringify(mods));
+                mods[id] = { preco: novoPreco, img: novaImg };
+                localStorage.setItem('th_imports_produtos_mod', JSON.stringify(mods));
 
-            carregarDadosSalvos();
-            renderizarTudo();
-            alert("Produto e imagem atualizados com sucesso!");
+                carregarDadosSalvos();
+                renderizarTudo();
+                alert("Salvo com sucesso!");
+            } catch (error) {
+                console.error(error);
+                alert("Erro ao salvar no navegador: A imagem escolhida é muito grande.");
+            }
         }
 
         window.carregarAvaliacoes = async function() {
