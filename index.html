@@ -68,6 +68,7 @@
 
     <header class="border-b border-neutral-800 py-3 sm:py-4 px-4 sticky top-0 bg-[#080808]/95 backdrop-blur z-50 shadow-2xl">
         <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <!-- LOGO COM CLIQUE SECRETO (4 vezes) -->
             <div class="flex items-center gap-3 cursor-pointer select-none" onclick="tratarCliqueLogo()">
                 <img id="logo-img-header" src="logo.jpg" alt="TH Imports Logo" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 gold-border object-cover shadow-lg pointer-events-none" onerror="this.onerror=null; this.src='reserva12.jpg'">
                 <div>
@@ -321,7 +322,7 @@
         </div>
     </div>
 
-    <!-- MODAL DO PAINEL ADMIN (Mudar Preço e Escolher Imagem do PC) -->
+    <!-- MODAL DO PAINEL ADMIN (Mudar Preço e Escolher Imagem do PC salvando no Firebase) -->
     <div id="modal-admin" class="fixed inset-0 z-50 bg-black/85 hidden items-center justify-center p-4">
         <div class="card-custom max-w-2xl w-full p-6 rounded-2xl relative border gold-border max-h-[90vh] flex flex-col">
             <button onclick="fecharPainelAdmin()" class="absolute top-4 right-4 text-neutral-400 hover:text-white">
@@ -333,7 +334,7 @@
                     <i class="fa-solid fa-lock"></i> Sair / Bloquear
                 </button>
             </div>
-            <p class="text-xs text-neutral-400 mb-4">Altere o preço ou clique para enviar uma foto do seu dispositivo para qualquer item. Salva direto no banco de dados.</p>
+            <p class="text-xs text-neutral-400 mb-4">Altere o preço ou envie uma foto para salvar direto no Firebase em tempo real.</p>
             
             <div class="mb-4">
                 <input type="text" id="admin-search" oninput="filtrarProdutosAdmin()" placeholder="Pesquisar produto por nome..." class="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-xs text-white focus:border-[#d4af37] outline-none">
@@ -344,7 +345,7 @@
             </div>
 
             <div class="mt-4 pt-3 border-t border-neutral-800 flex justify-between items-center">
-                <span class="text-[10px] text-neutral-400">Alterações sincronizadas no banco de dados.</span>
+                <span class="text-[10px] text-neutral-400">Dados salvos com segurança na nuvem (Firebase).</span>
                 <button onclick="fecharPainelAdmin()" class="gold-bg font-bold py-2 px-5 rounded-xl text-xs shadow">Fechar Painel</button>
             </div>
         </div>
@@ -358,7 +359,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, setDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, setDoc, doc, getDoc, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyC-cPboJobrxWwueCjxFu8sFRepvBYs8cU",
@@ -427,7 +428,8 @@
             { id: "garrafa-termica", cat: "variedade", nome: "Garrafa térmica", preco: "R$ 69,90", img: "garrafa-termica.jpg", descricao: "Parede dupla em aço inox: mantém a água gelada ou o café quente por horas." }
         ];
 
-        async function carregarDadosDoBanco() {
+        // Função para carregar modificações direto do Firestore
+        async function carregarDadosDoFirebase() {
             try {
                 const docRef = doc(db, "configuracoes", "produtos_mod");
                 const docSnap = await getDoc(docRef);
@@ -438,7 +440,7 @@
                     aplicarMods(produtosVariedadesBase, mods);
                 }
             } catch (e) {
-                console.error("Erro ao carregar dados do banco:", e);
+                console.error("Erro ao carregar do Firebase:", e);
             }
             renderizarTudo();
         }
@@ -538,7 +540,7 @@
         window.fecharPainelAdmin = function() {
             document.getElementById('modal-admin').classList.remove('flex');
             document.getElementById('modal-admin').classList.add('hidden');
-            carregarDadosDoBanco();
+            carregarDadosDoFirebase();
         }
 
         function renderizarListaAdmin(filtro = '') {
@@ -593,6 +595,7 @@
             renderizarListaAdmin(termo);
         }
 
+        // Salva direto no Firestore do Firebase
         window.salvarProdutoAdmin = async function(id) {
             const novoPreco = document.getElementById(`admin-preco-${id}`).value.trim();
             const preview = document.getElementById(`admin-preview-${id}`);
@@ -604,13 +607,14 @@
                 let mods = docSnap.exists() ? docSnap.data() : {};
 
                 mods[id] = { preco: novoPreco, img: novaImg };
+
                 await setDoc(docRef, mods);
 
-                await carregarDadosDoBanco();
+                await carregarDadosDoFirebase();
                 alert("Produto e imagem atualizados e salvos no banco de dados com sucesso!");
             } catch (error) {
-                console.error("Erro ao salvar no banco:", error);
-                alert("Erro ao salvar no banco de dados.");
+                console.error("Erro ao salvar no Firebase:", error);
+                alert("Erro ao salvar no banco de dados. Verifique a conexão.");
             }
         }
 
@@ -811,7 +815,7 @@
         }
 
         window.onload = function() {
-            carregarDadosDoBanco();
+            carregarDadosDoFirebase();
             carregarAvaliacoes();
         };
     </script>
